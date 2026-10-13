@@ -140,6 +140,19 @@
     .contact-section { text-align: center; background: radial-gradient(ellipse at 50% 110%, rgba(0, 132, 255, .2), transparent 55%); }
     .contact-section p { max-width: 600px; margin: 12px auto 25px; color: var(--muted); }
     .contact-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
+
+    .inquiry-wrap { max-width: 780px; margin: 32px auto 0; padding: 26px; text-align: left; border: 1px solid var(--line); border-radius: 16px; background: rgba(9, 23, 42, .88); }
+    .inquiry-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .field { display: flex; flex-direction: column; gap: 7px; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { color: #d7e8f9; font-size: .9rem; font-weight: 650; }
+    .field input, .field select, .field textarea { width: 100%; padding: 12px 13px; border: 1px solid #244662; border-radius: 9px; background: #061326; color: var(--text); font: inherit; }
+    .field input::placeholder, .field textarea::placeholder { color: #7893af; }
+    .field input:focus, .field select:focus, .field textarea:focus { outline: 2px solid rgba(18, 201, 245, .45); border-color: var(--cyan); }
+    .field textarea { min-height: 125px; resize: vertical; }
+    .form-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+    .form-note { margin: 13px 0 0 !important; color: #8fa9c4 !important; font-size: .8rem; }
+
     footer { border-top: 1px solid rgba(44,128,190,.25); padding: 25px 0; background: #040a13; }
     .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
     .footer-brand { display: flex; align-items: center; gap: 18px; }
@@ -168,6 +181,9 @@
       .orbit-art { min-height: 275px; transform: scale(.86); margin: -10px -30px; }
       section.content-section { padding: 64px 0; }
       .services-grid, .work-grid, .about-grid { grid-template-columns: 1fr; }
+      .inquiry-grid { grid-template-columns: 1fr; }
+      .field.full { grid-column: auto; }
+      .inquiry-wrap { padding: 18px; }
       .service-card { min-height: auto; }
       .about-grid { gap: 18px; }
       .footer-inner, .footer-brand { align-items: flex-start; flex-direction: column; }
@@ -280,11 +296,43 @@
       <div class="container">
         <div class="eyebrow">Get in Touch</div>
         <h2 class="section-heading" style="margin-top:10px;margin-bottom:0">Have an idea? <span class="gradient-text">Let's build it.</span></h2>
-        <p>Whether you need a website, a design, automation or tech support — we're here to help.</p>
-        <div class="contact-actions">
-          <a class="btn" href="mailto:nexorbit.business@gmail.com?subject=NexOrbit%20Project%20Inquiry">Email NexOrbit ✉</a>
-          <a class="btn btn-outline" href="https://wa.me/923287894595?text=Hello%20NexOrbit%2C%20I%20would%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener noreferrer">☏ Chat on WhatsApp</a>
-        </div>
+        <p>Tell us a little about your project. Choose email or WhatsApp to send your inquiry.</p>
+
+        <form class="inquiry-wrap" id="inquiryForm">
+          <div class="inquiry-grid">
+            <div class="field">
+              <label for="clientName">Your name *</label>
+              <input id="clientName" name="clientName" type="text" placeholder="e.g. Ali Khan" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="clientEmail">Your email *</label>
+              <input id="clientEmail" name="clientEmail" type="email" placeholder="you@example.com" autocomplete="email" required>
+            </div>
+            <div class="field full">
+              <label for="projectService">Which service do you need? *</label>
+              <select id="projectService" name="projectService" required>
+                <option value="">Select a service</option>
+                <option>Web Development</option>
+                <option>Graphic Design</option>
+                <option>Software Development</option>
+                <option>AI Automation</option>
+                <option>Cybersecurity</option>
+                <option>IT Support</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="projectDetails">Tell us about your project *</label>
+              <textarea id="projectDetails" name="projectDetails" placeholder="What do you need, what is your goal, and when do you need it?" required></textarea>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn" type="submit" id="emailSubmit">Send via Email ↗</button>
+            <button class="btn btn-outline" type="button" id="whatsappSubmit">Send via WhatsApp ↗</button>
+          </div>
+          <p class="form-note">This form opens your email app or WhatsApp with your message prepared. It does not store or send your details automatically.</p>
+        </form>
+        <p style="margin-top:22px">Or email us directly: <a href="mailto:nexorbit.business@gmail.com" style="color:var(--cyan)">nexorbit.business@gmail.com</a></p>
       </div>
     </section>
   </main>
@@ -305,6 +353,37 @@
       const open = navLinks.classList.toggle("open");
       menuToggle.setAttribute("aria-expanded", String(open));
     });
+
+    const inquiryForm = document.getElementById("inquiryForm");
+    function getInquiryMessage() {
+      const name = document.getElementById("clientName").value.trim();
+      const email = document.getElementById("clientEmail").value.trim();
+      const service = document.getElementById("projectService").value;
+      const details = document.getElementById("projectDetails").value.trim();
+      return `Hello NexOrbit,
+
+I'd like to discuss a project.
+
+Name: ${name}
+Email: ${email}
+Service: ${service}
+
+Project details:
+${details}`;
+    }
+    document.getElementById("emailSubmit").addEventListener("click", (event) => {
+      event.preventDefault();
+      if (!inquiryForm.reportValidity()) return;
+      const subject = encodeURIComponent("NexOrbit Project Inquiry");
+      const body = encodeURIComponent(getInquiryMessage());
+      window.location.href = `mailto:nexorbit.business@gmail.com?subject=${subject}&body=${body}`;
+    });
+    document.getElementById("whatsappSubmit").addEventListener("click", () => {
+      if (!inquiryForm.reportValidity()) return;
+      const message = encodeURIComponent(getInquiryMessage());
+      window.open(`https://wa.me/923287894595?text=${message}`, "_blank", "noopener,noreferrer");
+    });
+
     navLinks.querySelectorAll("a").forEach(link => {
       link.addEventListener("click", () => {
         navLinks.classList.remove("open");
