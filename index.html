@@ -162,6 +162,8 @@
     .inquiry-wrap { max-width: 780px; margin: 32px auto 0; padding: 26px; text-align: left; border: 1px solid var(--line); border-radius: 16px; background: rgba(9, 23, 42, .88); }
     .inquiry-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .field { display: flex; flex-direction: column; gap: 7px; }
+    /* Ensure hidden form rows stay hidden until a service is selected. */
+    .field[hidden] { display: none !important; }
     .field.full { grid-column: 1 / -1; }
     .field label { color: #d7e8f9; font-size: .9rem; font-weight: 650; }
     .field input, .field select, .field textarea { width: 100%; padding: 12px 13px; border: 1px solid #244662; border-radius: 9px; background: #061326; color: var(--text); font: inherit; }
@@ -523,6 +525,8 @@ ${details}`;
       serviceCategory.required = options.length > 0;
     }
     projectService.addEventListener("change", updateServiceCategories);
+    // Initialize the dependent category list and cards on page load.
+    updateServiceCategories();
 
     const workFilters = document.querySelectorAll(".work-filter");
     const workCards = document.querySelectorAll(".work-card[data-category]");
