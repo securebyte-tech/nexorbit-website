@@ -113,6 +113,13 @@
     .card-arrow { display: inline-block; margin-top: 13px; color: var(--cyan); font-size: 1.2rem; }
     .work-section { background: linear-gradient(180deg, rgba(9, 23, 42, .65), rgba(5,12,24,.15)); border-block: 1px solid rgba(44,128,190,.2); }
     .work-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; }
+    .design-category-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; margin-top:20px; }
+    .design-category { overflow:hidden; border:1px solid var(--line); border-radius:15px; background:#09172a; }
+    .design-category img { display:block; width:100%; height:180px; object-fit:cover; background:#10253b; }
+    .design-category-info { padding:18px; }
+    .design-category-info h3 { font-size:1rem; margin-bottom:7px; }
+    .design-category-info p { color:var(--muted); font-size:.87rem; }
+    .design-category-grid[hidden] { display:none !important; }
     .work-card { overflow: hidden; border: 1px solid var(--line); border-radius: 15px; background: #09172a; }
     .work-art { min-height: 175px; display: grid; place-items: center; padding: 22px; background: radial-gradient(circle at 50% 10%, #124a77, #071326 70%); border-bottom: 1px solid var(--line); }
     .mock-window { width: 100%; max-width: 290px; padding: 13px; border: 1px solid #2374a7; border-radius: 10px; background: rgba(3, 12, 26, .8); transform: rotate(-2deg); box-shadow: 0 12px 35px rgba(0,0,0,.25); }
@@ -174,7 +181,7 @@
       .hero-grid { grid-template-columns: 1fr; }
       .hero-copy { max-width: 680px; }
       .orbit-art { min-height: 310px; }
-      .services-grid, .work-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .services-grid, .work-grid, .design-category-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
       .about-grid { gap: 28px; }
       .trust-inner { justify-content: center; padding-block: 18px; }
       .trust-lead { width: 100%; text-align: center; }
@@ -191,7 +198,7 @@
       .hero-copy { font-size: 1rem; }
       .orbit-art { min-height: 275px; transform: scale(.86); margin: -10px -30px; }
       section.content-section { padding: 64px 0; }
-      .services-grid, .work-grid, .about-grid { grid-template-columns: 1fr; }
+      .services-grid, .work-grid, .design-category-grid, .about-grid { grid-template-columns: 1fr; }
       .inquiry-grid { grid-template-columns: 1fr; }
       .field.full { grid-column: auto; }
       .inquiry-wrap { padding: 18px; }
@@ -284,8 +291,18 @@
           <button class="work-filter" type="button" data-filter="web" aria-pressed="false">Web Development</button>
           <button class="work-filter" type="button" data-filter="graphic" aria-pressed="false">Graphic Designing</button>
         </div>
-        <div class="category-details" id="categoryDetails" aria-live="polite"><strong>Graphic Designing categories:</strong> Logo Design &amp; Brand Identity · Social Media Design · Advertising &amp; Ad Creatives · Business Stationery · Print Design · YouTube &amp; Content Graphics · Packaging &amp; Label Design · Photo Editing &amp; Image Manipulation. <strong>Web Development:</strong> responsive business websites, landing pages, service pages, project galleries and contact forms.</div>
-        <div class="work-grid">
+        <div class="category-details" id="categoryDetails" aria-live="polite" hidden></div>
+        <div class="design-category-grid" id="designCategoryGrid" hidden>
+          <article class="design-category"><img src="https://images.unsplash.com/photo-1634942536790-253e2f1e5f27?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Logo and brand identity design samples" loading="lazy"><div class="design-category-info"><h3>Logo Design &amp; Brand Identity</h3><p>Distinctive logos, brand colors and typography that help a business look consistent and recognizable.</p></div></article>
+          <article class="design-category"><img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Social media content design" loading="lazy"><div class="design-category-info"><h3>Social Media Design</h3><p>Instagram and Facebook posts, stories, carousels and cover graphics designed to fit your brand.</p></div></article>
+          <article class="design-category"><img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Advertising and marketing creative design" loading="lazy"><div class="design-category-info"><h3>Advertising &amp; Ad Creatives</h3><p>Promotional visuals and digital ad graphics that present products, offers and campaigns clearly.</p></div></article>
+          <article class="design-category"><img src="https://images.unsplash.com/photo-1589330694653-ded6df03f754?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Business stationery and cards" loading="lazy"><div class="design-category-info"><h3>Business Stationery</h3><p>Business cards, letterheads, envelopes and branded documents for a professional identity.</p></div></article>
+          <article class="design-category"><img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Print and editorial design workspace" loading="lazy"><div class="design-category-info"><h3>Print Design</h3><p>Flyers, brochures, posters, menus and pamphlets prepared for print or digital sharing.</p></div></article>
+          <article class="design-category"><img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Video and content graphics" loading="lazy"><div class="design-category-info"><h3>YouTube &amp; Content Graphics</h3><p>Thumbnails, channel banners, podcast covers and other visuals that support digital content.</p></div></article>
+          <article class="design-category"><img src="https://images.unsplash.com/photo-1602148797690-5f9e7c5c7a4d?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Product packaging and label design" loading="lazy"><div class="design-category-info"><h3>Packaging &amp; Label Design</h3><p>Product packaging, labels and box artwork that help products look polished on shelves and online.</p></div></article>
+          <article class="design-category"><img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Photo editing and creative photography" loading="lazy"><div class="design-category-info"><h3>Photo Editing &amp; Image Manipulation</h3><p>Image cleanup, retouching, background removal and creative edits for professional visuals.</p></div></article>
+        </div>
+        <div class="work-grid" id="workProjectGrid">
           <article class="work-card" data-category="web">
             <div class="work-art"><div class="mock-window"><div class="mock-top"><i></i><i></i><i></i></div><div class="mock-bars"><span></span><span></span><span></span></div></div></div>
             <div class="work-info"><span class="concept">Concept Project</span><h3>Business Website</h3><p>A modern, responsive website concept focused on clarity and customer experience.</p></div>
@@ -439,20 +456,20 @@ ${details}`;
     const workFilters = document.querySelectorAll(".work-filter");
     const workCards = document.querySelectorAll(".work-card[data-category]");
     const categoryDetails = document.getElementById("categoryDetails");
-    const categoryCopy = {
-      all: "<strong>Graphic Designing categories:</strong> Logo Design &amp; Brand Identity, Social Media Design, Advertising &amp; Ad Creatives, Business Stationery, Print Design, YouTube &amp; Content Graphics, Packaging &amp; Label Design, Photo Editing &amp; Image Manipulation. <strong>Web Development:</strong> responsive business websites, landing pages, service pages, project galleries and contact forms.",
-      web: "<strong>Web Development:</strong> responsive business websites, landing pages, service pages, project galleries, mobile-friendly layouts and contact forms.",
-      graphic: "<strong>Graphic Designing categories:</strong> Logo Design &amp; Brand Identity, Social Media Design, Advertising &amp; Ad Creatives, Business Stationery, Print Design, YouTube &amp; Content Graphics, Packaging &amp; Label Design, Photo Editing &amp; Image Manipulation."
-    };
+    const designCategoryGrid = document.getElementById("designCategoryGrid");
+    const workProjectGrid = document.getElementById("workProjectGrid");
     workFilters.forEach(button => {
       button.addEventListener("click", () => {
         const filter = button.dataset.filter;
         workFilters.forEach(item => item.setAttribute("aria-pressed", String(item === button)));
+        const showDesignCategories = filter === "graphic";
+        designCategoryGrid.hidden = !showDesignCategories;
+        workProjectGrid.hidden = showDesignCategories;
+        categoryDetails.hidden = true;
         workCards.forEach(card => {
           const categories = (card.dataset.category || "").split(/\s+/);
           card.hidden = filter !== "all" && !categories.includes(filter);
         });
-        categoryDetails.innerHTML = categoryCopy[filter] || categoryCopy.all;
       });
     });
     document.querySelectorAll("[data-service]").forEach(link => {
