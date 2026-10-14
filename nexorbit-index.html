@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#06101f">
+  <meta name="description" content="NexOrbit helps businesses grow with web development, graphic design, software solutions, AI automation, cybersecurity and IT support.">
+  <title>NexOrbit | Digital Solutions</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #050c18;
+      --panel: #09172a;
+      --panel-2: #0d1c31;
+      --line: #153b5b;
+      --cyan: #12c9f5;
+      --blue: #168bff;
+      --text: #f4f8ff;
+      --muted: #a9bfd9;
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 86px; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    h1, h2, h3, .logo {
+      font-family: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+    }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    .container { width: min(var(--max), 88%); margin-inline: auto; }
+    .site-header {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(5, 12, 24, .88);
+      border-bottom: 1px solid rgba(70, 155, 220, .2);
+      backdrop-filter: blur(18px);
+    }
+    .nav-wrap { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .logo { font-size: 1.65rem; font-weight: 850; letter-spacing: -1.4px; }
+    .logo span { color: var(--cyan); }
+    .nav-links { display: flex; align-items: center; gap: 30px; color: #d2e2f4; font-size: .92rem; }
+    .nav-links a:not(.btn):hover, .footer-links a:hover { color: var(--cyan); }
+    .menu-toggle {
+      display: none; border: 1px solid var(--line); border-radius: 9px;
+      color: var(--text); background: var(--panel); padding: 8px 12px; font: inherit;
+    }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      min-height: 46px; padding: 11px 20px; border-radius: 10px;
+      border: 1px solid var(--cyan); background: linear-gradient(110deg, var(--cyan), #24aaff);
+      color: #03101d; font-weight: 800; font-size: .92rem;
+      box-shadow: 0 0 24px rgba(18, 201, 245, .12);
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(18, 201, 245, .22); }
+    .btn-outline { background: rgba(5, 12, 24, .35); color: var(--text); box-shadow: none; }
+    .btn-outline:hover { background: rgba(18, 201, 245, .09); }
+    .hero {
+      position: relative; isolation: isolate; overflow: hidden;
+      padding: 88px 0 76px;
+      background: radial-gradient(ellipse at 75% 35%, rgba(0, 109, 191, .18), transparent 38%),
+                  linear-gradient(180deg, #061326 0%, var(--bg) 100%);
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.03fr .97fr; align-items: center; gap: 36px; }
+    .eyebrow { color: var(--cyan); font-size: .76rem; font-weight: 850; letter-spacing: .2em; text-transform: uppercase; }
+    h1 { margin: 18px 0 20px; max-width: 720px; font-size: clamp(2.8rem, 5.3vw, 5rem); line-height: 1.04; letter-spacing: -.055em; }
+    .gradient-text { color: var(--cyan); background: linear-gradient(95deg, #13d7f5, #238dff); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-copy { max-width: 580px; color: var(--muted); font-size: 1.08rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 29px; }
+    .hero-note { margin-top: 23px; color: #7e9ab8; font-size: .83rem; }
+    .orbit-art { position: relative; min-height: 390px; display: grid; place-items: center; }
+    .orbit-glow { position: absolute; width: 280px; height: 280px; border-radius: 50%; background: #007bff; filter: blur(85px); opacity: .19; }
+    .planet {
+      position: relative; width: clamp(190px, 24vw, 285px); aspect-ratio: 1; border-radius: 50%;
+      background: radial-gradient(circle at 32% 27%, #a5f4ff 0%, #28c4f7 8%, #0871c8 26%, #082d66 53%, #030b1b 73%);
+      box-shadow: inset -24px -25px 48px rgba(0,0,0,.8), inset 12px 10px 28px rgba(92,227,255,.4), 0 0 60px rgba(0,174,255,.22);
+      border: 1px solid rgba(56, 205, 255, .65);
+    }
+    .planet::before, .planet::after { content: ""; position: absolute; inset: 14% -28%; border: 2px solid rgba(18,201,245,.8); border-radius: 50%; transform: rotate(-25deg) skewX(-14deg); }
+    .planet::after { inset: 3% -17%; transform: rotate(53deg) skewX(20deg); border-color: rgba(31,139,255,.65); }
+    .orbit { position: absolute; border: 1px solid rgba(21, 166, 255, .24); border-radius: 50%; width: 370px; height: 300px; transform: rotate(-28deg); }
+    .orbit.two { width: 430px; height: 240px; transform: rotate(35deg); }
+    .spark { position: absolute; width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 15px var(--cyan); }
+    .spark.s1 { top: 19%; right: 21%; } .spark.s2 { bottom: 19%; left: 19%; } .spark.s3 { top: 51%; left: 7%; width: 6px; height: 6px; }
+    .trust-strip { border-block: 1px solid rgba(44, 128, 190, .25); background: #071326; }
+    .trust-inner { min-height: 78px; display: flex; justify-content: space-between; align-items: center; gap: 22px; flex-wrap: wrap; }
+    .trust-lead { font-weight: 750; }
+    .trust-item { display: flex; align-items: center; gap: 9px; color: #b7cce4; font-size: .9rem; }
+    .trust-item b { color: var(--cyan); font-size: 1.15rem; }
+    section.content-section { padding: 86px 0; }
+    .section-heading { text-align: center; max-width: 760px; margin: 0 auto 34px; }
+    .section-heading h2 { margin: 9px 0 9px; font-size: clamp(2rem, 3.4vw, 2.8rem); line-height: 1.15; letter-spacing: -.035em; }
+    .section-heading p { color: var(--muted); }
+    .services-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .service-card {
+      position: relative; min-height: 205px; padding: 25px;
+      background: linear-gradient(145deg, rgba(10, 29, 51, .95), rgba(5, 17, 33, .96));
+      border: 1px solid var(--line); border-radius: 15px;
+      transition: transform .22s ease, border-color .22s ease, background .22s ease;
+    }
+    .service-card:hover { transform: translateY(-5px); border-color: #0daee8; background: #0b1d34; }
+    .service-icon { width: 43px; height: 43px; display: grid; place-items: center; margin-bottom: 13px; color: var(--cyan); font-size: 1.65rem; }
+    .service-card h3 { font-size: 1.1rem; margin-bottom: 7px; }
+    .service-card p { color: var(--muted); font-size: .92rem; }
+    .card-arrow { display: inline-block; margin-top: 13px; color: var(--cyan); font-size: 1.2rem; }
+    .work-section { background: linear-gradient(180deg, rgba(9, 23, 42, .65), rgba(5,12,24,.15)); border-block: 1px solid rgba(44,128,190,.2); }
+    .work-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; }
+    .work-card { overflow: hidden; border: 1px solid var(--line); border-radius: 15px; background: #09172a; }
+    .work-art { min-height: 175px; display: grid; place-items: center; padding: 22px; background: radial-gradient(circle at 50% 10%, #124a77, #071326 70%); border-bottom: 1px solid var(--line); }
+    .mock-window { width: 100%; max-width: 290px; padding: 13px; border: 1px solid #2374a7; border-radius: 10px; background: rgba(3, 12, 26, .8); transform: rotate(-2deg); box-shadow: 0 12px 35px rgba(0,0,0,.25); }
+    .mock-top { display: flex; gap: 5px; margin-bottom: 12px; }
+    .mock-top i { width: 6px; height: 6px; background: #12c9f5; border-radius: 50%; }
+    .mock-bars { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .mock-bars span { height: 42px; border-radius: 5px; background: linear-gradient(135deg, #0c4d85, #0e223c); border: 1px solid #174b70; }
+    .mock-bars span:first-child { height: 92px; grid-row: span 2; }
+    .brand-tiles { display: grid; grid-template-columns: repeat(2, 76px); gap: 9px; transform: rotate(3deg); }
+    .brand-tiles span { display: grid; place-items: center; height: 65px; border-radius: 8px; background: linear-gradient(145deg, #0bbfe7, #164bb0); color: #fff; font-weight: 800; font-size: .75rem; }
+    .brand-tiles span:nth-child(2) { background: linear-gradient(145deg, #a33af0, #1748a0); }
+    .brand-tiles span:nth-child(3) { background: linear-gradient(145deg, #113d67, #087a9e); }
+    .brand-tiles span:nth-child(4) { background: linear-gradient(145deg, #214b88, #0d1d3b); }
+    .flow-art { display: flex; align-items: center; gap: 9px; }
+    .flow-node { width: 64px; height: 57px; display: grid; place-items: center; text-align: center; padding: 4px; border: 1px solid #0daee8; border-radius: 10px; color: #bcefff; font-size: .7rem; background: #0b2540; }
+    .flow-arrow { color: var(--cyan); font-size: 1.2rem; }
+    .project-stack { margin-top: 12px; color: #75dff5 !important; font-size: .75rem !important; letter-spacing: .04em; }
+    .work-filters { display:flex; flex-wrap:wrap; gap:10px; margin: 0 0 18px; }
+    .work-filter { border:1px solid var(--line); background:rgba(255,255,255,.03); color:var(--muted); border-radius:999px; padding:10px 16px; font:inherit; font-size:.84rem; cursor:pointer; transition:all .2s ease; }
+    .work-filter:hover, .work-filter[aria-pressed="true"] { color:#071321; background:var(--cyan); border-color:var(--cyan); }
+    .category-details { margin:0 0 24px; padding:16px 18px; border:1px solid var(--line); border-radius:12px; background:rgba(255,255,255,.025); color:var(--muted); font-size:.9rem; }
+    .category-details strong { color:var(--text); }
+    .project-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
+    .project-link { display:inline-flex; align-items:center; gap:7px; padding:9px 12px; border:1px solid rgba(117,223,245,.45); border-radius:8px; color:#75dff5; font-size:.8rem; font-weight:700; text-decoration:none; }
+    .project-link:hover { background:rgba(117,223,245,.1); }
+    .project-link.secondary { color:var(--muted); border-color:var(--line); }
+    .work-card[hidden] { display:none !important; }
+    .work-info { padding: 20px; }
+    .concept { display: inline-block; padding: 3px 8px; margin-bottom: 9px; border: 1px solid #087aa5; border-radius: 20px; color: var(--cyan); font-size: .7rem; }
+    .work-info h3 { font-size: 1.04rem; margin-bottom: 6px; }
+    .work-info p { color: var(--muted); font-size: .88rem; }
+    .about-band { position: relative; overflow: hidden; background: radial-gradient(ellipse at 10% 50%, rgba(0,125,220,.17), transparent 40%), #071326; border-bottom: 1px solid rgba(44,128,190,.25); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 55px; }
+    .about-grid h2 { margin-top: 10px; font-size: clamp(2rem, 3.5vw, 2.8rem); line-height: 1.15; letter-spacing: -.035em; }
+    .about-grid p { color: var(--muted); }
+    .contact-section { text-align: center; background: radial-gradient(ellipse at 50% 110%, rgba(0, 132, 255, .2), transparent 55%); }
+    .contact-section p { max-width: 600px; margin: 12px auto 25px; color: var(--muted); }
+    .contact-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
+
+    .inquiry-wrap { max-width: 780px; margin: 32px auto 0; padding: 26px; text-align: left; border: 1px solid var(--line); border-radius: 16px; background: rgba(9, 23, 42, .88); }
+    .inquiry-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .field { display: flex; flex-direction: column; gap: 7px; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { color: #d7e8f9; font-size: .9rem; font-weight: 650; }
+    .field input, .field select, .field textarea { width: 100%; padding: 12px 13px; border: 1px solid #244662; border-radius: 9px; background: #061326; color: var(--text); font: inherit; }
+    .field input::placeholder, .field textarea::placeholder { color: #7893af; }
+    .field input:focus, .field select:focus, .field textarea:focus { outline: 2px solid rgba(18, 201, 245, .45); border-color: var(--cyan); }
+    .field textarea { min-height: 125px; resize: vertical; }
+    .form-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+    .form-note { margin: 13px 0 0 !important; color: #8fa9c4 !important; font-size: .8rem; }
+
+    footer { border-top: 1px solid rgba(44,128,190,.25); padding: 25px 0; background: #040a13; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .footer-brand { display: flex; align-items: center; gap: 18px; }
+    .footer-tagline { padding-left: 18px; border-left: 1px solid #24425e; color: #9bb5d0; font-size: .85rem; }
+    .footer-links { display: flex; gap: 22px; color: #b5c8de; font-size: .85rem; }
+    :focus-visible { outline: 2px solid var(--cyan); outline-offset: 4px; }
+    @media (max-width: 850px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-copy { max-width: 680px; }
+      .orbit-art { min-height: 310px; }
+      .services-grid, .work-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .about-grid { gap: 28px; }
+      .trust-inner { justify-content: center; padding-block: 18px; }
+      .trust-lead { width: 100%; text-align: center; }
+    }
+    @media (max-width: 580px) {
+      .container { width: min(100% - 34px, var(--max)); }
+      .nav-wrap { min-height: 68px; flex-wrap: wrap; padding-block: 12px; }
+      .menu-toggle { display: inline-block; }
+      .nav-links { display: none; width: 100%; padding: 12px 0 4px; flex-direction: column; align-items: stretch; gap: 14px; }
+      .nav-links.open { display: flex; }
+      .nav-links .btn { width: 100%; }
+      .hero { padding: 65px 0 48px; }
+      h1 { font-size: clamp(2.65rem, 12vw, 4rem); }
+      .hero-copy { font-size: 1rem; }
+      .orbit-art { min-height: 275px; transform: scale(.86); margin: -10px -30px; }
+      section.content-section { padding: 64px 0; }
+      .services-grid, .work-grid, .about-grid { grid-template-columns: 1fr; }
+      .inquiry-grid { grid-template-columns: 1fr; }
+      .field.full { grid-column: auto; }
+      .inquiry-wrap { padding: 18px; }
+      .service-card { min-height: auto; }
+      .about-grid { gap: 18px; }
+      .footer-inner, .footer-brand { align-items: flex-start; flex-direction: column; }
+      .footer-tagline { border-left: 0; padding-left: 0; }
+      .footer-links { flex-wrap: wrap; gap: 15px; }
+      .flow-node { width: 58px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="logo" href="#home" aria-label="NexOrbit home">Nex<span>Orbit</span></a>
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks">Menu ☰</button>
+      <nav class="nav-links" id="navLinks" aria-label="Main navigation">
+        <a href="#services">Services</a>
+        <a href="#work">Work</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a class="btn" href="#contact">Let's Talk <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Design. Develop. Automate. Secure.</div>
+          <h1>Turn Bold Ideas Into <span class="gradient-text">Digital Reality.</span></h1>
+          <p class="hero-copy">We help businesses grow with web development, creative design, AI automation and secure technology solutions.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#services">Explore Our Services <span aria-hidden="true">→</span></a>
+            <a class="btn btn-outline" href="#work">View Our Work</a>
+          </div>
+          <p class="hero-note">Practical digital solutions for ambitious businesses.</p>
+        </div>
+        <div class="orbit-art" aria-hidden="true">
+          <div class="orbit-glow"></div><div class="orbit"></div><div class="orbit two"></div>
+          <div class="planet"></div>
+          <i class="spark s1"></i><i class="spark s2"></i><i class="spark s3"></i>
+        </div>
+      </div>
+    </section>
+
+    <div class="trust-strip">
+      <div class="container trust-inner">
+        <div class="trust-lead">Built for ambitious businesses</div>
+        <div class="trust-item"><b>◇</b> Creative Thinking</div>
+        <div class="trust-item"><b>⚙</b> Reliable Delivery</div>
+        <div class="trust-item"><b>ϟ</b> Smart Automation</div>
+        <div class="trust-item"><b>⬡</b> Security Mindset</div>
+      </div>
+    </div>
+
+    <section class="content-section" id="services">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">Our Services</div>
+          <h2>Solutions That Move You <span class="gradient-text">Forward</span></h2>
+          <p>Modern technologies, creative ideas and practical support — all in one place.</p>
+        </div>
+        <div class="services-grid">
+          <article class="service-card"><div class="service-icon" aria-hidden="true">◎</div><h3>Web Development</h3><p>Responsive, modern websites with clean layouts and great user experiences.</p><a class="card-arrow" href="#contact" aria-label="Ask about web development">→</a></article>
+          <article class="service-card"><div class="service-icon" aria-hidden="true">✎</div><h3>Graphic Design</h3><p>Brand identities, social media creatives and marketing designs.</p><a class="card-arrow" href="#contact" aria-label="Ask about graphic design">→</a></article>
+          <article class="service-card"><div class="service-icon" aria-hidden="true">&lt;/&gt;</div><h3>Software Development</h3><p>Custom applications, useful tools and business-focused digital solutions.</p><a class="card-arrow" href="#contact" aria-label="Ask about software development">→</a></article>
+          <article class="service-card"><div class="service-icon" aria-hidden="true">⌘</div><h3>AI Automation</h3><p>Intelligent workflows to help reduce repetitive tasks and save time.</p><a class="card-arrow" href="#contact" aria-label="Ask about AI automation">→</a></article>
+          <article class="service-card"><div class="service-icon" aria-hidden="true">⬡</div><h3>Cybersecurity</h3><p>Security guidance and authorized assessments to help identify risks.</p><a class="card-arrow" href="#contact" aria-label="Ask about cybersecurity">→</a></article>
+          <article class="service-card"><div class="service-icon" aria-hidden="true">◉</div><h3>IT Support</h3><p>Practical technology assistance, troubleshooting and setup guidance.</p><a class="card-arrow" href="#contact" aria-label="Ask about IT support">→</a></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section work-section" id="work">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">Selected Work</div>
+          <h2>Projects &amp; Creative <span class="gradient-text">Solutions</span></h2>
+          <p>Concept projects that demonstrate the kinds of solutions NexOrbit can create.</p>
+        </div>
+        <div class="work-filters" role="group" aria-label="Filter portfolio by service category">
+          <button class="work-filter" type="button" data-filter="all" aria-pressed="true">All Projects</button>
+          <button class="work-filter" type="button" data-filter="web" aria-pressed="false">Web Development</button>
+          <button class="work-filter" type="button" data-filter="graphic" aria-pressed="false">Graphic Designing</button>
+        </div>
+        <div class="category-details" id="categoryDetails" aria-live="polite"><strong>Graphic Designing categories:</strong> Logo Design &amp; Brand Identity · Social Media Design · Advertising &amp; Ad Creatives · Business Stationery · Print Design · YouTube &amp; Content Graphics · Packaging &amp; Label Design · Photo Editing &amp; Image Manipulation. <strong>Web Development:</strong> responsive business websites, landing pages, service pages, project galleries and contact forms.</div>
+        <div class="work-grid">
+          <article class="work-card" data-category="web">
+            <div class="work-art"><div class="mock-window"><div class="mock-top"><i></i><i></i><i></i></div><div class="mock-bars"><span></span><span></span><span></span></div></div></div>
+            <div class="work-info"><span class="concept">Concept Project</span><h3>Business Website</h3><p>A modern, responsive website concept focused on clarity and customer experience.</p></div>
+          </article>
+          <article class="work-card" data-category="graphic">
+            <div class="work-art"><div class="brand-tiles"><span>YOUR<br>BRAND</span><span>CREATE</span><span>CONNECT</span><span>GROW</span></div></div>
+            <div class="work-info"><span class="concept">Concept Project</span><h3>Brand &amp; Social Campaign</h3><p>A visual direction for consistent social media content and brand recognition.</p></div>
+          </article>
+          <article class="work-card" data-category="software">
+            <div class="work-art"><div class="flow-art"><div class="flow-node">Trigger</div><span class="flow-arrow">→</span><div class="flow-node">Process</div><span class="flow-arrow">→</span><div class="flow-node">Action ✓</div></div></div>
+            <div class="work-info"><span class="concept">Concept Project</span><h3>Workflow Automation</h3><p>A sample workflow concept to reduce repetitive steps and improve efficiency.</p></div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section class="about-band content-section" id="about">
+      <div class="container about-grid">
+        <div><div class="eyebrow">About NexOrbit</div><h2>Small team mindset.<br><span class="gradient-text">Big-picture solutions.</span></h2></div>
+        <p>NexOrbit is a digital technology agency focused on helping businesses and individuals turn their ideas into useful digital experiences. We combine creativity, technical expertise and a problem-solving mindset to deliver practical solutions that make a real difference.</p>
+      </div>
+    </section>
+
+    <section class="content-section contact-section" id="contact">
+      <div class="container">
+        <div class="eyebrow">Get in Touch</div>
+        <h2 class="section-heading" style="margin-top:10px;margin-bottom:0">Have an idea? <span class="gradient-text">Let's build it.</span></h2>
+        <p>Tell us a little about your project. Choose email or WhatsApp to send your inquiry.</p>
+
+        <form class="inquiry-wrap" id="inquiryForm">
+          <div class="inquiry-grid">
+            <div class="field">
+              <label for="clientName">Your name *</label>
+              <input id="clientName" name="clientName" type="text" placeholder="e.g. Ali Khan" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="clientEmail">Your email *</label>
+              <input id="clientEmail" name="clientEmail" type="email" placeholder="you@example.com" autocomplete="email" required>
+            </div>
+            <div class="field full">
+              <label for="projectService">Which service do you need? *</label>
+              <select id="projectService" name="projectService" required>
+                <option value="">Select a service</option>
+                <option>Web Development</option>
+                <option>Graphic Design</option>
+                <option>Software Development</option>
+                <option>AI Automation</option>
+                <option>Cybersecurity</option>
+                <option>IT Support</option>
+                <option>Not sure yet</option>
+              </select>
+            </div>
+            <div class="field full" id="serviceCategoryField" hidden>
+              <label for="serviceCategory">Which category do you need? *</label>
+              <select id="serviceCategory" name="serviceCategory">
+                <option value="">Select a category</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="projectDetails">Tell us about your project *</label>
+              <textarea id="projectDetails" name="projectDetails" placeholder="What do you need, what is your goal, and when do you need it?" required></textarea>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn" type="submit" id="emailSubmit">Send via Email ↗</button>
+            <button class="btn btn-outline" type="button" id="whatsappSubmit">Send via WhatsApp ↗</button>
+          </div>
+          <p class="form-note">This form opens your email app or WhatsApp with your message prepared. It does not store or send your details automatically.</p>
+        </form>
+        <p style="margin-top:22px">Or email us directly: <a href="mailto:nexorbit.business@gmail.com" style="color:var(--cyan)">nexorbit.business@gmail.com</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-brand"><a class="logo" href="#home">Nex<span>Orbit</span></a><div class="footer-tagline">Design. Develop. Automate. Secure.</div></div>
+      <nav class="footer-links" aria-label="Footer navigation"><a href="#services">Services</a><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+      <div style="width:100%;color:#68829f;font-size:.78rem">© <span id="year">2026</span> NexOrbit. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+    menuToggle.addEventListener("click", () => {
+      const open = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(open));
+    });
+
+    const inquiryForm = document.getElementById("inquiryForm");
+    function getInquiryMessage() {
+      const name = document.getElementById("clientName").value.trim();
+      const email = document.getElementById("clientEmail").value.trim();
+      const service = document.getElementById("projectService").value;
+      const details = document.getElementById("projectDetails").value.trim();
+      return `Hello NexOrbit,
+
+I'd like to discuss a project.
+
+Name: ${name}
+Email: ${email}
+Service: ${service}
+Category: ${category || "Not specified"}
+
+Project details:
+${details}`;
+    }
+    document.getElementById("emailSubmit").addEventListener("click", (event) => {
+      event.preventDefault();
+      if (!inquiryForm.reportValidity()) return;
+      const subject = encodeURIComponent("NexOrbit Project Inquiry");
+      const body = encodeURIComponent(getInquiryMessage());
+      window.location.href = `mailto:nexorbit.business@gmail.com?subject=${subject}&body=${body}`;
+    });
+    document.getElementById("whatsappSubmit").addEventListener("click", () => {
+      if (!inquiryForm.reportValidity()) return;
+      const message = encodeURIComponent(getInquiryMessage());
+      window.open(`https://wa.me/923287894595?text=${message}`, "_blank", "noopener,noreferrer");
+    });
+
+    const projectService = document.getElementById("projectService");
+    const serviceCategoryField = document.getElementById("serviceCategoryField");
+    const serviceCategory = document.getElementById("serviceCategory");
+    const serviceCategories = {
+      "Web Development": ["Business Website", "Landing Page", "Portfolio Website", "E-commerce Website", "Website Redesign", "Website Maintenance"],
+      "Graphic Design": ["Logo Design & Brand Identity", "Social Media Design", "Advertising & Ad Creatives", "Business Stationery", "Print Design (Flyers, Brochures, Posters)", "YouTube & Content Graphics", "Packaging & Label Design", "Photo Editing & Image Manipulation"],
+      "Software Development": ["Custom Software", "Web Application", "Desktop Application", "API / Integration", "Bug Fixes & Improvements"],
+      "AI Automation": ["AI Chatbot", "Workflow Automation", "AI Assistant Integration", "Data Processing Automation", "Business Process Automation"],
+      "Cybersecurity": ["Security Consultation", "Website Security Review", "Basic Vulnerability Assessment (Authorized)", "Security Hardening", "Cybersecurity Learning / Guidance"],
+      "IT Support": ["PC / Laptop Troubleshooting", "Software Installation & Setup", "Network / Wi-Fi Support", "System Optimization", "Backup & Data Transfer"],
+      "Not sure yet": ["Help me choose the right service"]
+    };
+    function updateServiceCategories() {
+      const service = projectService.value;
+      const options = serviceCategories[service] || [];
+      serviceCategory.innerHTML = '<option value="">Select a category</option>';
+      options.forEach(category => {
+        const option = document.createElement("option");
+        option.value = category;
+        option.textContent = category;
+        serviceCategory.appendChild(option);
+      });
+      serviceCategoryField.hidden = options.length === 0;
+      serviceCategory.required = options.length > 0;
+    }
+    projectService.addEventListener("change", updateServiceCategories);
+
+    const workFilters = document.querySelectorAll(".work-filter");
+    const workCards = document.querySelectorAll(".work-card[data-category]");
+    const categoryDetails = document.getElementById("categoryDetails");
+    const categoryCopy = {
+      all: "<strong>Graphic Designing categories:</strong> Logo Design &amp; Brand Identity, Social Media Design, Advertising &amp; Ad Creatives, Business Stationery, Print Design, YouTube &amp; Content Graphics, Packaging &amp; Label Design, Photo Editing &amp; Image Manipulation. <strong>Web Development:</strong> responsive business websites, landing pages, service pages, project galleries and contact forms.",
+      web: "<strong>Web Development:</strong> responsive business websites, landing pages, service pages, project galleries, mobile-friendly layouts and contact forms.",
+      graphic: "<strong>Graphic Designing categories:</strong> Logo Design &amp; Brand Identity, Social Media Design, Advertising &amp; Ad Creatives, Business Stationery, Print Design, YouTube &amp; Content Graphics, Packaging &amp; Label Design, Photo Editing &amp; Image Manipulation."
+    };
+    workFilters.forEach(button => {
+      button.addEventListener("click", () => {
+        const filter = button.dataset.filter;
+        workFilters.forEach(item => item.setAttribute("aria-pressed", String(item === button)));
+        workCards.forEach(card => {
+          const categories = (card.dataset.category || "").split(/\s+/);
+          card.hidden = filter !== "all" && !categories.includes(filter);
+        });
+        categoryDetails.innerHTML = categoryCopy[filter] || categoryCopy.all;
+      });
+    });
+    document.querySelectorAll("[data-service]").forEach(link => {
+      link.addEventListener("click", () => {
+        const service = link.dataset.service;
+        const select = document.getElementById("projectService");
+        if (select) {
+          select.value = service;
+          select.dispatchEvent(new Event("change"));
+        }
+      });
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+  </script>
+</body>
+</html>
