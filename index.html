@@ -305,6 +305,14 @@
           <button class="work-filter" type="button" data-filter="all" aria-pressed="true">All Projects</button>
           <button class="work-filter" type="button" data-filter="web" aria-pressed="false">Web Development</button>
           <button class="work-filter" type="button" data-filter="graphic" aria-pressed="false">Graphic Designing</button>
+          <button class="work-filter" type="button" data-filter="software" aria-pressed="false">Software Development</button>
+          <button class="work-filter" type="button" data-filter="ai" aria-pressed="false">AI Automation</button>
+          <button class="work-filter" type="button" data-filter="cybersecurity" aria-pressed="false">Cybersecurity</button>
+          <button class="work-filter" type="button" data-filter="it" aria-pressed="false">IT Support</button>
+          <button class="work-filter" type="button" data-filter="software" aria-pressed="false">Software Development</button>
+          <button class="work-filter" type="button" data-filter="ai" aria-pressed="false">AI Automation</button>
+          <button class="work-filter" type="button" data-filter="cybersecurity" aria-pressed="false">Cybersecurity</button>
+          <button class="work-filter" type="button" data-filter="it" aria-pressed="false">IT Support</button>
         </div>
         <div class="category-details" id="categoryDetails" aria-live="polite" hidden></div>
         <div class="design-category-grid" id="designCategoryGrid" hidden>
@@ -581,18 +589,55 @@ ${details}`;
     const categoryDetails = document.getElementById("categoryDetails");
     const designCategoryGrid = document.getElementById("designCategoryGrid");
     const workProjectGrid = document.getElementById("workProjectGrid");
+    const workCategoryServices = {
+      web: "Web Development",
+      graphic: "Graphic Design",
+      software: "Software Development",
+      ai: "AI Automation",
+      cybersecurity: "Cybersecurity",
+      it: "IT Support"
+    };
+
+    function renderSelectedWorkCategories(serviceName) {
+      const items = serviceCategories[serviceName] || [];
+      designCategoryGrid.innerHTML = "";
+      items.forEach(([name, image, description]) => {
+        const card = document.createElement("article");
+        card.className = "design-category";
+        const img = document.createElement("img");
+        img.src = image;
+        img.alt = name + " example";
+        img.loading = "lazy";
+        attachImageFallback(img, name);
+        const info = document.createElement("div");
+        info.className = "design-category-info";
+        const heading = document.createElement("h3");
+        heading.textContent = name;
+        const paragraph = document.createElement("p");
+        paragraph.textContent = description;
+        info.append(heading, paragraph);
+        card.append(img, info);
+        designCategoryGrid.appendChild(card);
+      });
+    }
+
     workFilters.forEach(button => {
       button.addEventListener("click", () => {
         const filter = button.dataset.filter;
         workFilters.forEach(item => item.setAttribute("aria-pressed", String(item === button)));
-        const showDesignCategories = filter === "graphic";
-        designCategoryGrid.hidden = !showDesignCategories;
-        workProjectGrid.hidden = showDesignCategories;
+        const isServiceCategory = Object.prototype.hasOwnProperty.call(workCategoryServices, filter);
+        designCategoryGrid.hidden = !isServiceCategory;
+        workProjectGrid.hidden = isServiceCategory;
         categoryDetails.hidden = true;
-        workCards.forEach(card => {
-          const categories = (card.dataset.category || "").split(/\s+/);
-          card.hidden = filter !== "all" && !categories.includes(filter);
-        });
+
+        if (isServiceCategory) {
+          renderSelectedWorkCategories(workCategoryServices[filter]);
+        } else {
+          workCards.forEach(card => {
+            const categories = (card.dataset.category || "").split(/\\s+/);
+            card.hidden = filter !== "all" && !categories.includes(filter);
+          });
+        }
       });
     });
     document.querySelectorAll("[data-service]").forEach(link => {
