@@ -308,13 +308,13 @@
         </div>
         <div class="category-details" id="categoryDetails" aria-live="polite" hidden></div>
         <div class="design-category-grid" id="designCategoryGrid" hidden>
-          <article class="design-category"><img src="https://images.unsplash.com/photo-1634942536790-253e2f1e5f27?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Logo and brand identity design samples" loading="lazy"><div class="design-category-info"><h3>Logo Design &amp; Brand Identity</h3><p>Distinctive logos, brand colors and typography that help a business look consistent and recognizable.</p></div></article>
+          <article class="design-category"><img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Logo and brand identity design samples" loading="lazy"><div class="design-category-info"><h3>Logo Design &amp; Brand Identity</h3><p>Distinctive logos, brand colors and typography that help a business look consistent and recognizable.</p></div></article>
           <article class="design-category"><img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Social media content design" loading="lazy"><div class="design-category-info"><h3>Social Media Design</h3><p>Instagram and Facebook posts, stories, carousels and cover graphics designed to fit your brand.</p></div></article>
           <article class="design-category"><img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Advertising and marketing creative design" loading="lazy"><div class="design-category-info"><h3>Advertising &amp; Ad Creatives</h3><p>Promotional visuals and digital ad graphics that present products, offers and campaigns clearly.</p></div></article>
           <article class="design-category"><img src="https://images.unsplash.com/photo-1589330694653-ded6df03f754?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Business stationery and cards" loading="lazy"><div class="design-category-info"><h3>Business Stationery</h3><p>Business cards, letterheads, envelopes and branded documents for a professional identity.</p></div></article>
           <article class="design-category"><img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Print and editorial design workspace" loading="lazy"><div class="design-category-info"><h3>Print Design</h3><p>Flyers, brochures, posters, menus and pamphlets prepared for print or digital sharing.</p></div></article>
           <article class="design-category"><img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Video and content graphics" loading="lazy"><div class="design-category-info"><h3>YouTube &amp; Content Graphics</h3><p>Thumbnails, channel banners, podcast covers and other visuals that support digital content.</p></div></article>
-          <article class="design-category"><img src="https://images.unsplash.com/photo-1602148797690-5f9e7c5c7a4d?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Product packaging and label design" loading="lazy"><div class="design-category-info"><h3>Packaging &amp; Label Design</h3><p>Product packaging, labels and box artwork that help products look polished on shelves and online.</p></div></article>
+          <article class="design-category"><img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Product packaging and label design" loading="lazy"><div class="design-category-info"><h3>Packaging &amp; Label Design</h3><p>Product packaging, labels and box artwork that help products look polished on shelves and online.</p></div></article>
           <article class="design-category"><img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="Photo editing and creative photography" loading="lazy"><div class="design-category-info"><h3>Photo Editing &amp; Image Manipulation</h3><p>Image cleanup, retouching, background removal and creative edits for professional visuals.</p></div></article>
         </div>
         <div class="work-grid" id="workProjectGrid">
@@ -563,6 +563,18 @@ ${details}`;
     projectService.addEventListener("change", updateServiceCategories);
     // Initialize the dependent category list and cards on page load.
     updateServiceCategories();
+
+    // Keep category cards visually complete if a remote image is unavailable.
+    document.querySelectorAll(".design-category img").forEach(img => {
+      img.addEventListener("error", () => {
+        if (img.dataset.fallbackApplied) return;
+        img.dataset.fallbackApplied = "true";
+        const label = (img.alt || "NexOrbit design").replace(/[<>&\"']/g, "").slice(0, 48);
+        const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071326"/><stop offset="1" stop-color="#087fa8"/></linearGradient></defs><rect width="900" height="520" fill="url(#g)"/><circle cx="450" cy="210" r="105" fill="none" stroke="#12c9f5" stroke-width="8"/><path d="M390 250 L450 130 L510 250 L475 250 L450 200 L425 250 Z" fill="#12c9f5"/><text x="450" y="380" text-anchor="middle" font-family="Arial,sans-serif" font-size="28" font-weight="700" fill="#ffffff">NEXORBIT</text><text x="450" y="425" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" fill="#b8d9e9">${label}</text></svg>`;
+        img.src = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
+      });
+      if (img.complete && img.naturalWidth === 0) img.dispatchEvent(new Event("error"));
+    });
 
     const workFilters = document.querySelectorAll(".work-filter");
     const workCards = document.querySelectorAll(".work-card[data-category]");
