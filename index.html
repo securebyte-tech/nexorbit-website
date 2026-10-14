@@ -113,7 +113,12 @@
     .card-arrow { display: inline-block; margin-top: 13px; color: var(--cyan); font-size: 1.2rem; }
     .work-section { background: linear-gradient(180deg, rgba(9, 23, 42, .65), rgba(5,12,24,.15)); border-block: 1px solid rgba(44,128,190,.2); }
     .work-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; }
-    .design-category-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; margin-top:20px; }
+    .design-category-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:18px; margin-top:20px; width:100%; }
+    #serviceCategoryPreview { margin-top:16px; }
+    #serviceCategoryPreview .design-category { display:flex; flex-direction:column; height:100%; }
+    #serviceCategoryPreview .design-category-info { display:flex; flex:1; flex-direction:column; align-items:flex-start; }
+    #serviceCategoryPreview .design-category-info p { flex:1; }
+    #serviceCategoryPreview .design-category img { height:190px; object-fit:cover; }
     .design-category { overflow:hidden; border:1px solid var(--line); border-radius:15px; background:#09172a; }
     .design-category img { display:block; width:100%; height:180px; object-fit:cover; background:#10253b; }
     .design-category-info { padding:18px; }
@@ -214,6 +219,14 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { transition: none !important; }
+    }
+
+    @media (max-width: 900px) {
+      .design-category-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    }
+    @media (max-width: 600px) {
+      .design-category-grid { grid-template-columns:1fr; }
+      #serviceCategoryPreview .design-category img { height:210px; }
     }
   </style>
 </head>
@@ -436,6 +449,27 @@ ${details}`;
     const serviceCategoryField = document.getElementById("serviceCategoryField");
     const serviceCategory = document.getElementById("serviceCategory");
     const serviceCategoryPreview = document.getElementById("serviceCategoryPreview");
+    // If a remote image URL is unavailable, show a locally embedded illustration instead of a broken image.
+    function categoryFallbackSvg(label) {
+      const isPackaging = /packaging|label/i.test(label);
+      const isLogo = /logo|brand identity/i.test(label);
+      const title = isPackaging ? 'PACKAGING DESIGN' : isLogo ? 'BRAND IDENTITY' : String(label).toUpperCase().slice(0, 26);
+      const artwork = isPackaging
+        ? `<rect x="145" y="65" width="145" height="160" rx="10" fill="#f3e9d6" stroke="#11c8f2" stroke-width="3"/><path d="M145 95 L215 50 L290 95" fill="#d6c8ae" stroke="#11c8f2" stroke-width="3"/><rect x="166" y="125" width="103" height="62" rx="7" fill="#0c2340"/><text x="217" y="151" font-size="12" fill="#ffffff" text-anchor="middle" font-weight="700">NEXORBIT</text><text x="217" y="169" font-size="9" fill="#11c8f2" text-anchor="middle">PRODUCT LABEL</text>`
+        : isLogo
+        ? `<circle cx="215" cy="130" r="65" fill="#0b2844" stroke="#11c8f2" stroke-width="3"/><path d="M182 145 L212 83 L246 145 L226 145 L212 119 L201 145 Z" fill="#11c8f2"/><text x="215" y="222" font-size="20" fill="#ffffff" text-anchor="middle" font-weight="800">NEXORBIT</text><text x="215" y="244" font-size="10" fill="#8fcfe2" text-anchor="middle" letter-spacing="3">BRAND CONCEPT</text>`
+        : `<rect x="105" y="60" width="220" height="150" rx="12" fill="#0c2845" stroke="#11c8f2" stroke-width="2"/><rect x="125" y="82" width="70" height="95" rx="7" fill="#11c8f2"/><rect x="205" y="82" width="100" height="14" rx="4" fill="#d9edf8"/><rect x="205" y="107" width="80" height="10" rx="4" fill="#5a88a8"/><rect x="205" y="128" width="90" height="10" rx="4" fill="#5a88a8"/><text x="215" y="245" font-size="15" fill="#ffffff" text-anchor="middle" font-weight="700">${title}</text>`;
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430 280"><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071326"/><stop offset="1" stop-color="#123b5c"/></linearGradient></defs><rect width="430" height="280" fill="url(#bg)"/>${artwork}</svg>`;
+      return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
+    }
+    function attachImageFallback(img, label) {
+      img.addEventListener('error', function onImageError() {
+        img.removeEventListener('error', onImageError);
+        img.src = categoryFallbackSvg(label || img.alt || 'Design category');
+      });
+    }
+    document.querySelectorAll('.design-category img').forEach(img => attachImageFallback(img, img.alt));
+
     const serviceCategories = {
       "Web Development": [
         ["Business Website", "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=900&q=80", "Professional websites for businesses to explain services, build trust and help customers get in touch."],
@@ -501,6 +535,7 @@ ${details}`;
         img.src = image;
         img.alt = category;
         img.loading = "lazy";
+        attachImageFallback(img, category);
         const info = document.createElement("div");
         info.className = "design-category-info";
         const heading = document.createElement("h3");
@@ -523,6 +558,7 @@ ${details}`;
       serviceCategoryField.hidden = options.length === 0;
       serviceCategoryPreview.hidden = options.length === 0;
       serviceCategory.required = options.length > 0;
+      serviceCategoryPreview.setAttribute("aria-label", service + " categories and descriptions");
     }
     projectService.addEventListener("change", updateServiceCategories);
     // Initialize the dependent category list and cards on page load.
