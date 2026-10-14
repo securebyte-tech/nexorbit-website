@@ -129,6 +129,19 @@
     .flow-art { display: flex; align-items: center; gap: 9px; }
     .flow-node { width: 64px; height: 57px; display: grid; place-items: center; text-align: center; padding: 4px; border: 1px solid #0daee8; border-radius: 10px; color: #bcefff; font-size: .7rem; background: #0b2540; }
     .flow-arrow { color: var(--cyan); font-size: 1.2rem; }
+    .urbannest-art { background: radial-gradient(circle at 50% 10%, #5b654e, #18231e 75%); }
+    .urbannest-preview { width: 100%; max-width: 310px; min-height: 155px; overflow: hidden; border: 1px solid rgba(237,232,218,.42); background: #f5f0e8; color: #222820; box-shadow: 0 15px 34px rgba(0,0,0,.32); transform: rotate(-1.5deg); }
+    .urbannest-preview-nav { height: 29px; display: flex; align-items: center; gap: 5px; padding: 0 9px; border-bottom: 1px solid #d9d3c7; font-family: Georgia, serif; font-size: 9px; }
+    .urbannest-preview-nav small { display: block; font: 5px Arial, sans-serif; letter-spacing: 2px; }
+    .urbannest-symbol { color: #78816a; font-size: 19px; }
+    .urbannest-preview-nav i { width: 12px; height: 2px; margin-left: auto; background: #78816a; }
+    .urbannest-preview-nav i + i, .urbannest-preview-nav i + i + i { margin-left: -2px; }
+    .urbannest-preview-body { min-height: 126px; padding: 18px 18px; background: linear-gradient(90deg, rgba(34,40,32,.82), rgba(34,40,32,.25)), url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=700&q=75') center/cover; color: white; }
+    .urbannest-preview-body > span { font: 6px Arial, sans-serif; letter-spacing: 1.5px; }
+    .urbannest-preview-body strong { display: block; margin-top: 7px; font: 20px/1.05 Georgia, serif; }
+    .urbannest-preview-body em { color: #d4ddc6; font-weight: normal; }
+    .urbannest-preview-line { width: 36px; height: 2px; margin-top: 10px; background: #a6b394; }
+    .project-stack { margin-top: 12px; color: #75dff5 !important; font-size: .75rem !important; letter-spacing: .04em; }
     .work-info { padding: 20px; }
     .concept { display: inline-block; padding: 3px 8px; margin-bottom: 9px; border: 1px solid #087aa5; border-radius: 20px; color: var(--cyan); font-size: .7rem; }
     .work-info h3 { font-size: 1.04rem; margin-bottom: 6px; }
@@ -280,6 +293,15 @@
           <article class="work-card">
             <div class="work-art"><div class="flow-art"><div class="flow-node">Trigger</div><span class="flow-arrow">→</span><div class="flow-node">Process</div><span class="flow-arrow">→</span><div class="flow-node">Action ✓</div></div></div>
             <div class="work-info"><span class="concept">Concept Project</span><h3>Workflow Automation</h3><p>A sample workflow concept to reduce repetitive steps and improve efficiency.</p></div>
+          </article>
+          <article class="work-card">
+            <div class="work-art urbannest-art" aria-label="UrbanNest Interiors website design concept preview">
+              <div class="urbannest-preview">
+                <div class="urbannest-preview-nav"><span class="urbannest-symbol">⌂</span><span>UrbanNest <small>INTERIORS</small></span><i></i><i></i><i></i></div>
+                <div class="urbannest-preview-body"><span>INTERIOR DESIGN STUDIO</span><strong>Make room for<br><em>better living.</em></strong><div class="urbannest-preview-line"></div></div>
+              </div>
+            </div>
+            <div class="work-info"><span class="concept">Portfolio Project</span><h3>UrbanNest Interiors</h3><p>A responsive interior-design studio website concept featuring services, project showcases, and a contact enquiry form.</p><p class="project-stack">HTML · CSS · JavaScript</p></div>
           </article>
         </div>
       </div>
