@@ -458,6 +458,40 @@
 
     }
 
+
+    /* Pricing section */
+    .pricing-section { background: linear-gradient(180deg, rgba(7,18,34,.55), rgba(6,16,30,.92)); }
+    .pricing-intro { max-width:760px; margin:0 auto 28px; color:var(--muted); text-align:center; }
+    .pricing-note { margin:24px auto 0; max-width:850px; color:var(--muted); font-size:.92rem; text-align:center; }
+    .pricing-category-tabs { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin:26px auto 12px; }
+    .pricing-tab { border:1px solid rgba(17,200,242,.35); background:rgba(10,27,47,.85); color:var(--text); border-radius:999px; padding:11px 17px; font:inherit; font-weight:650; cursor:pointer; transition:background .2s,border-color .2s,transform .2s; }
+    .pricing-tab:hover { border-color:var(--cyan); transform:translateY(-1px); }
+    .pricing-tab[aria-pressed="true"] { background:linear-gradient(110deg,rgba(17,200,242,.22),rgba(38,112,255,.2)); border-color:var(--cyan); box-shadow:0 0 0 1px rgba(17,200,242,.12),0 8px 24px rgba(0,0,0,.18); }
+    .pricing-group { margin-top:30px; }
+    .pricing-group[hidden] { display:none !important; }
+    .price-card { transition:border-color .2s,transform .2s,box-shadow .2s; }
+    .price-card:hover { border-color:rgba(17,200,242,.55); transform:translateY(-3px); box-shadow:0 12px 28px rgba(0,0,0,.18); }
+    .pricing-group h3 { font-size:1.3rem; margin:0 0 14px; }
+    .pricing-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+    .price-card { border:1px solid var(--line); border-radius:14px; padding:17px; background:rgba(10,27,47,.88); min-width:0; }
+    .price-card h4 { margin:0 0 8px; font-size:1rem; }
+    .price-card p { color:var(--muted); font-size:.9rem; margin:0 0 12px; }
+    .price-local { color:var(--text); font-weight:750; font-size:1.08rem; }
+    .price-international { color:var(--accent); font-size:.9rem; margin-top:4px; }
+    .price-unit { color:var(--muted); font-size:.78rem; font-weight:400; }
+    .payment-panel { margin-top:22px; padding:22px; border:1px solid var(--line); border-radius:16px; background:linear-gradient(135deg,rgba(10,27,47,.96),rgba(7,18,34,.92)); text-align:left; }
+    .payment-panel h3 { margin:0 0 8px; }
+    .payment-panel p, .payment-panel li { color:var(--muted); }
+    .payment-methods { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-top:14px; }
+    .payment-method { border:1px solid var(--line); border-radius:12px; padding:14px; background:rgba(255,255,255,.025); }
+    .payment-method strong { display:block; margin-bottom:5px; color:var(--text); }
+    .payment-price { color:var(--cyan); font-size:1.2rem; font-weight:750; margin:8px 0; }
+    .payment-note { font-size:.88rem; margin-top:14px; }
+    @media(max-width:560px){.payment-methods{grid-template-columns:1fr;}}
+    .pricing-cta { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-top:26px; }
+    @media (max-width:850px) { .pricing-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:560px) { .pricing-grid { grid-template-columns:1fr; } .pricing-section { padding:60px 0; } }
+
   </style>
 
 </head>
@@ -477,6 +511,8 @@
         <a href="#services">Services</a>
 
         <a href="#work">Work</a>
+
+        <a href="#pricing">Pricing</a>
 
         <a href="#about">About</a>
 
@@ -680,6 +716,90 @@
 
 
 
+
+    <section class="content-section pricing-section" id="pricing">
+      <div class="container">
+        <div class="section-heading">
+          <div class="eyebrow">Clear Starting Prices</div>
+          <h2>Services &amp; <span class="gradient-text">Pricing</span></h2>
+          <p>Transparent starting rates to help you plan your project. Final quotes depend on scope, complexity, delivery time and revisions.</p>
+        </div>
+        <p class="pricing-intro">Prices below are starting estimates, not fixed quotes. Choose a service category to see its prices. Local prices are in Pakistani rupees (PKR); international prices are in US dollars (USD).</p>
+        <div class="pricing-category-tabs" id="pricingCategoryTabs" role="group" aria-label="Choose a pricing category"></div>
+
+        <div class="pricing-group"><h3>Graphic Designing</h3><div class="pricing-grid">
+          <article class="price-card"><h4>Logo Design &amp; Brand Identity</h4><p>Logo concepts, colors and typography.</p><div class="price-local">From Rs. 5,000</div><div class="price-international">From $40</div></article>
+          <article class="price-card"><h4>Social Media Design</h4><p>Posts, stories and carousel graphics.</p><div class="price-local">From Rs. 1,000 <span class="price-unit">/ post</span></div><div class="price-international">From $10 / post</div></article>
+          <article class="price-card"><h4>Advertising &amp; Ad Creatives</h4><p>Promotional visuals and digital ads.</p><div class="price-local">From Rs. 1,500 <span class="price-unit">/ ad</span></div><div class="price-international">From $15 / ad</div></article>
+          <article class="price-card"><h4>Business Stationery</h4><p>Business cards, letterheads and branded documents.</p><div class="price-local">From Rs. 3,000 <span class="price-unit">/ set</span></div><div class="price-international">From $30 / set</div></article>
+          <article class="price-card"><h4>Print Design</h4><p>Flyers, brochures, posters and menus.</p><div class="price-local">From Rs. 2,500 <span class="price-unit">/ design</span></div><div class="price-international">From $25 / design</div></article>
+          <article class="price-card"><h4>YouTube &amp; Content Graphics</h4><p>Thumbnails, channel banners and podcast covers.</p><div class="price-local">From Rs. 1,500 <span class="price-unit">/ thumbnail</span></div><div class="price-international">From $15 / thumbnail</div></article>
+          <article class="price-card"><h4>Packaging &amp; Label Design</h4><p>Product labels, boxes and packaging artwork.</p><div class="price-local">From Rs. 6,000</div><div class="price-international">From $60</div></article>
+          <article class="price-card"><h4>Photo Editing &amp; Image Manipulation</h4><p>Retouching, cleanup and background removal.</p><div class="price-local">From Rs. 800 <span class="price-unit">/ image</span></div><div class="price-international">From $8 / image</div></article>
+        </div></div>
+
+        <div class="pricing-group"><h3>Web Development</h3><div class="pricing-grid">
+          <article class="price-card"><h4>Business Website</h4><p>Responsive website for a business.</p><div class="price-local">From Rs. 25,000</div><div class="price-international">From $250</div></article>
+          <article class="price-card"><h4>Landing Page</h4><p>Single page focused on one offer or goal.</p><div class="price-local">From Rs. 10,000</div><div class="price-international">From $100</div></article>
+          <article class="price-card"><h4>Portfolio Website</h4><p>Personal or professional work showcase.</p><div class="price-local">From Rs. 15,000</div><div class="price-international">From $150</div></article>
+          <article class="price-card"><h4>E-commerce Website</h4><p>Online store setup and product pages.</p><div class="price-local">From Rs. 50,000</div><div class="price-international">From $500</div></article>
+          <article class="price-card"><h4>WordPress Website</h4><p>CMS-based website setup and styling.</p><div class="price-local">From Rs. 20,000</div><div class="price-international">From $200</div></article>
+          <article class="price-card"><h4>Website Redesign</h4><p>Refresh of an existing website's design.</p><div class="price-local">From Rs. 15,000</div><div class="price-international">From $150</div></article>
+          <article class="price-card"><h4>Website Maintenance</h4><p>Routine updates and basic maintenance.</p><div class="price-local">From Rs. 5,000 <span class="price-unit">/ month</span></div><div class="price-international">From $50 / month</div></article>
+          <article class="price-card"><h4>Mobile Optimization</h4><p>Improve responsive layout and usability.</p><div class="price-local">From Rs. 5,000</div><div class="price-international">From $50</div></article>
+        </div></div>
+
+        <div class="pricing-group"><h3>Software Development</h3><div class="pricing-grid">
+          <article class="price-card"><h4>Custom Software</h4><p>Purpose-built tools for a business need.</p><div class="price-local">From Rs. 50,000</div><div class="price-international">From $500</div></article>
+          <article class="price-card"><h4>Web Application</h4><p>Interactive browser-based application.</p><div class="price-local">From Rs. 60,000</div><div class="price-international">From $600</div></article>
+          <article class="price-card"><h4>Desktop Application</h4><p>Software designed for desktop use.</p><div class="price-local">From Rs. 40,000</div><div class="price-international">From $400</div></article>
+          <article class="price-card"><h4>API Integration</h4><p>Connect supported services and APIs.</p><div class="price-local">From Rs. 10,000</div><div class="price-international">From $100</div></article>
+          <article class="price-card"><h4>Database Design &amp; Setup</h4><p>Basic database planning and setup.</p><div class="price-local">From Rs. 10,000</div><div class="price-international">From $100</div></article>
+          <article class="price-card"><h4>Bug Fixes</h4><p>Small fixes after reviewing the issue.</p><div class="price-local">From Rs. 3,000</div><div class="price-international">From $30</div></article>
+          <article class="price-card"><h4>Python Automation Script</h4><p>Automate a clearly defined repetitive task.</p><div class="price-local">From Rs. 8,000</div><div class="price-international">From $80</div></article>
+        </div></div>
+
+        <div class="pricing-group"><h3>AI Automation</h3><div class="pricing-grid">
+          <article class="price-card"><h4>AI Chatbot</h4><p>Basic chatbot setup for common questions.</p><div class="price-local">From Rs. 20,000</div><div class="price-international">From $200</div></article>
+          <article class="price-card"><h4>Business Workflow Automation</h4><p>Reduce repetitive business steps.</p><div class="price-local">From Rs. 15,000</div><div class="price-international">From $150</div></article>
+          <article class="price-card"><h4>AI Assistant Integration</h4><p>Connect AI features to an existing workflow.</p><div class="price-local">From Rs. 25,000</div><div class="price-international">From $250</div></article>
+          <article class="price-card"><h4>Automated Email Systems</h4><p>Basic email triggers and workflow setup.</p><div class="price-local">From Rs. 10,000</div><div class="price-international">From $100</div></article>
+          <article class="price-card"><h4>AI Document Processing</h4><p>Extract or organize information from documents.</p><div class="price-local">From Rs. 20,000</div><div class="price-international">From $200</div></article>
+          <article class="price-card"><h4>CRM Automation</h4><p>Automate selected CRM tasks and handoffs.</p><div class="price-local">From Rs. 20,000</div><div class="price-international">From $200</div></article>
+          <article class="price-card"><h4>Custom AI Integration</h4><p>Custom integration scoped to requirements.</p><div class="price-local">From Rs. 30,000</div><div class="price-international">From $300</div></article>
+        </div></div>
+
+        <div class="pricing-group"><h3>Cybersecurity</h3><div class="pricing-grid">
+          <article class="price-card"><h4>Security Consultation</h4><p>Discuss risks, priorities and next steps.</p><div class="price-local">From Rs. 5,000 <span class="price-unit">/ session</span></div><div class="price-international">From $50 / session</div></article>
+          <article class="price-card"><h4>Website Security Review</h4><p>Review agreed website security basics.</p><div class="price-local">From Rs. 15,000</div><div class="price-international">From $150</div></article>
+          <article class="price-card"><h4>Authorized Vulnerability Assessment</h4><p>Scope-limited assessment with written permission.</p><div class="price-local">From Rs. 25,000</div><div class="price-international">From $250</div></article>
+          <article class="price-card"><h4>Security Hardening</h4><p>Apply agreed security configuration improvements.</p><div class="price-local">From Rs. 15,000</div><div class="price-international">From $150</div></article>
+          <article class="price-card"><h4>Basic Security Audit</h4><p>Baseline review and prioritized recommendations.</p><div class="price-local">From Rs. 20,000</div><div class="price-international">From $200</div></article>
+          <article class="price-card"><h4>Security Awareness Training</h4><p>Introductory awareness session for a team.</p><div class="price-local">From Rs. 10,000 <span class="price-unit">/ session</span></div><div class="price-international">From $100 / session</div></article>
+          <article class="price-card"><h4>Security Monitoring Setup</h4><p>Initial setup; ongoing service quoted separately.</p><div class="price-local">From Rs. 25,000</div><div class="price-international">From $250</div></article>
+        </div></div>
+
+        <div class="pricing-group"><h3>IT Support</h3><div class="pricing-grid">
+          <article class="price-card"><h4>PC Troubleshooting</h4><p>Initial diagnosis of common PC issues.</p><div class="price-local">From Rs. 2,000 <span class="price-unit">/ session</span></div><div class="price-international">From $20 / session</div></article>
+          <article class="price-card"><h4>Software Installation &amp; Setup</h4><p>Install and configure supported software.</p><div class="price-local">From Rs. 1,500</div><div class="price-international">From $15</div></article>
+          <article class="price-card"><h4>System Optimization</h4><p>Review startup, storage and system settings.</p><div class="price-local">From Rs. 3,000</div><div class="price-international">From $30</div></article>
+          <article class="price-card"><h4>Wi-Fi &amp; Network Troubleshooting</h4><p>Basic network diagnosis and configuration support.</p><div class="price-local">From Rs. 3,000</div><div class="price-international">From $30</div></article>
+          <article class="price-card"><h4>Backup &amp; Data Transfer</h4><p>Help organize backups and transfer files.</p><div class="price-local">From Rs. 3,000</div><div class="price-international">From $30</div></article>
+          <article class="price-card"><h4>Remote IT Support</h4><p>Remote help for supported technical issues.</p><div class="price-local">From Rs. 2,000 <span class="price-unit">/ hour</span></div><div class="price-international">From $20 / hour</div></article>
+          <article class="price-card"><h4>Small Business IT Setup</h4><p>Basic workstation and software setup planning.</p><div class="price-local">From Rs. 15,000</div><div class="price-international">From $150</div></article>
+        </div></div>
+
+        <div class="pricing-group"><h3>Design Packages</h3><div class="pricing-grid">
+          <article class="price-card"><h4>Starter Design</h4><p>1 basic logo concept, 2 revision rounds and PNG/JPG exports.</p><div class="price-local">Rs. 5,000</div><div class="price-international">Ask for international quote</div></article>
+          <article class="price-card"><h4>Social Media Pack</h4><p>8 social media post designs with consistent branding and 2 revision rounds.</p><div class="price-local">Rs. 8,000</div><div class="price-international">Ask for international quote</div></article>
+          <article class="price-card"><h4>Brand Identity Pack</h4><p>Logo, color palette, typography, business card and basic brand guide.</p><div class="price-local">Rs. 15,000</div><div class="price-international">Ask for international quote</div></article>
+        </div></div>
+
+        <p class="pricing-note">Final quotes depend on scope, complexity, delivery time and revision count. Domain, hosting, paid software, stock assets, third-party API fees and ongoing subscriptions are charged separately when required. Complex projects receive a custom quote. Cybersecurity testing is performed only with explicit authorization and an agreed scope.</p>
+        <div class="pricing-cta"><a class="btn" href="#contact">Get a Custom Quote <span aria-hidden="true">↗</span></a></div>
+      </div>
+    </section>
+
     <section class="about-band content-section" id="about">
 
       <div class="container about-grid">
@@ -727,8 +847,18 @@
             </div>
 
             <div class="field full">
+              <label for="clientCountry">Which country are you based in? *</label>
+              <select id="clientCountry" name="clientCountry" required>
+                <option value="">Select your country</option>
+                <option value="Pakistan">Pakistan</option>
+                <option value="International">Outside Pakistan</option>
+              </select>
+              <p class="form-note" style="margin-top:8px">Pricing and available payment methods will update based on your selection.</p>
+            </div>
 
-              <label for="projectService">Which service do you need? \*</label>
+            <div class="field full">
+
+              <label for="projectService">Which service do you need? *</label>
 
               <select id="projectService" name="projectService" required>
 
@@ -773,8 +903,19 @@
             </div>
 
             <div class="field full">
+              <div class="payment-panel" id="paymentPanel" hidden aria-live="polite">
+                <div class="eyebrow">Your Selected Service</div>
+                <h3 id="paymentHeading">Pricing &amp; Payment</h3>
+                <p id="paymentSummary">Select your country, service and category to see the relevant starting price and payment options.</p>
+                <div class="payment-price" id="selectedPrice"></div>
+                <div class="payment-methods" id="paymentMethods"></div>
+                <p class="payment-note" id="advanceNote">Advance payment is required before work begins. Final scope and payment instructions are confirmed in writing.</p>
+              </div>
+            </div>
 
-              <label for="projectDetails">Tell us about your project \*</label>
+            <div class="field full">
+
+              <label for="projectDetails">Tell us about your project *</label>
 
               <textarea id="projectDetails" name="projectDetails" placeholder="What do you need, what is your goal, and when do you need it?" required></textarea>
 
@@ -810,7 +951,7 @@
 
       <div class="footer-brand"><a class="logo" href="#home">Nex<span>Orbit</span></a><div class="footer-tagline">Design. Develop. Automate. Secure.</div></div>
 
-      <nav class="footer-links" aria-label="Footer navigation"><a href="#services">Services</a><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+      <nav class="footer-links" aria-label="Footer navigation"><a href="#services">Services</a><a href="#work">Work</a><a href="#pricing">Pricing</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
 
       <div style="width:100%;color:#68829f;font-size:.78rem">© <span id="year">2026</span> NexOrbit. All rights reserved.</div>
 
@@ -848,6 +989,7 @@
 
       const service = document.getElementById("projectService").value;
       const category = document.getElementById("serviceCategory").value;
+      const country = document.getElementById("clientCountry").value;
       const details = document.getElementById("projectDetails").value.trim();
 
       return `Hello NexOrbit,
@@ -900,6 +1042,97 @@ ${details}`;
 
 
 
+    // Interactive pricing: show one category at a time, matching the site's navy/cyan theme.
+    const pricingSection = document.getElementById("pricing");
+    const pricingGroups = Array.from(pricingSection.querySelectorAll(".pricing-group"));
+    const pricingTabs = document.getElementById("pricingCategoryTabs");
+    const categoryAliases = {
+      "Web Development": "Web Development", "Graphic Design": "Graphic Designing",
+      "Software Development": "Software Development", "AI Automation": "AI Automation",
+      "Cybersecurity": "Cybersecurity", "IT Support": "IT Support"
+    };
+    function showPricingCategory(name, shouldScroll = false) {
+      const group = pricingGroups.find(item => item.querySelector("h3")?.textContent.trim().toLowerCase() === name.toLowerCase());
+      if (!group) return;
+      pricingGroups.forEach(item => { item.hidden = item !== group; });
+      pricingTabs.querySelectorAll(".pricing-tab").forEach(btn => {
+        const active = btn.dataset.category === group.querySelector("h3").textContent.trim();
+        btn.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+      if (shouldScroll) pricingSection.scrollIntoView({behavior:"smooth", block:"start"});
+    }
+    pricingGroups.forEach((group, index) => {
+      const name = group.querySelector("h3").textContent.trim();
+      const button = document.createElement("button");
+      button.type = "button"; button.className = "pricing-tab"; button.textContent = name;
+      button.dataset.category = name; button.setAttribute("aria-pressed", "false");
+      button.addEventListener("click", () => showPricingCategory(name));
+      pricingTabs.appendChild(button);
+    });
+    showPricingCategory("Graphic Designing");
+    document.querySelectorAll(".service-card").forEach(card => {
+      const heading = card.querySelector("h3")?.textContent.trim();
+      const category = categoryAliases[heading];
+      if (!category) return;
+      card.style.cursor = "pointer";
+      card.addEventListener("click", event => {
+        if (event.target.closest("a")) event.preventDefault();
+        showPricingCategory(category, true);
+      });
+      card.setAttribute("title", "Click to view " + category + " pricing");
+    });
+
+    const clientCountry = document.getElementById("clientCountry");
+    const paymentPanel = document.getElementById("paymentPanel");
+    const paymentHeading = document.getElementById("paymentHeading");
+    const paymentSummary = document.getElementById("paymentSummary");
+    const selectedPrice = document.getElementById("selectedPrice");
+    const paymentMethods = document.getElementById("paymentMethods");
+    const pricingAmounts = {
+      "Logo Design & Brand Identity":["Rs. 5,000","$40"], "Social Media Design":["Rs. 1,000 / post","$10 / post"],
+      "Advertising & Ad Creatives":["Rs. 1,500 / ad","$15 / ad"], "Business Stationery":["Rs. 3,000 / set","$30 / set"],
+      "Print Design":["Rs. 2,500 / design","$25 / design"], "YouTube & Content Graphics":["Rs. 1,500 / thumbnail","$15 / thumbnail"],
+      "Packaging & Label Design":["Rs. 6,000","$60"], "Photo Editing & Image Manipulation":["Rs. 800 / image","$8 / image"],
+      "Business Website":["Rs. 25,000","$250"], "Landing Page":["Rs. 10,000","$100"], "Portfolio Website":["Rs. 15,000","$150"],
+      "E-commerce Website":["Rs. 50,000","$500"], "WordPress Website":["Rs. 20,000","$200"], "Website Redesign":["Rs. 15,000","$150"],
+      "Website Maintenance":["Rs. 5,000 / month","$50 / month"], "Mobile Optimization":["Rs. 5,000","$50"],
+      "Custom Software":["Rs. 50,000","$500"], "Web Application":["Rs. 60,000","$600"], "Desktop Application":["Rs. 40,000","$400"],
+      "API Integration":["Rs. 10,000","$100"], "Database Design & Setup":["Rs. 10,000","$100"], "Bug Fixes":["Rs. 3,000","$30"], "Python Automation Script":["Rs. 8,000","$80"],
+      "AI Chatbot":["Rs. 20,000","$200"], "Business Workflow Automation":["Rs. 15,000","$150"], "AI Assistant Integration":["Rs. 25,000","$250"],
+      "Automated Email Systems":["Rs. 10,000","$100"], "AI Document Processing":["Rs. 20,000","$200"], "CRM Automation":["Rs. 20,000","$200"], "Custom AI Integration":["Rs. 30,000","$300"],
+      "Security Consultation":["Rs. 5,000 / session","$50 / session"], "Website Security Review":["Rs. 15,000","$150"], "Authorized Vulnerability Assessment":["Rs. 25,000","$250"],
+      "Security Hardening":["Rs. 15,000","$150"], "Basic Security Audit":["Rs. 20,000","$200"], "Security Awareness Training":["Rs. 10,000 / session","$100 / session"], "Security Monitoring Setup":["Rs. 25,000","$250"],
+      "PC Troubleshooting":["Rs. 2,000 / session","$20 / session"], "Software Installation & Setup":["Rs. 1,500","$15"], "System Optimization":["Rs. 3,000","$30"],
+      "Wi-Fi & Network Troubleshooting":["Rs. 3,000","$30"], "Backup & Data Transfer":["Rs. 3,000","$30"], "Remote IT Support":["Rs. 2,000 / hour","$20 / hour"], "Small Business IT Setup":["Rs. 15,000","$150"]
+    };
+    function paymentCard(title, body) {
+      const el = document.createElement("div"); el.className = "payment-method";
+      const strong = document.createElement("strong"); strong.textContent = title;
+      const p = document.createElement("p"); p.textContent = body;
+      el.append(strong,p); return el;
+    }
+    function updatePaymentPanel() {
+      const country = clientCountry.value;
+      const service = document.getElementById("projectService").value;
+      const category = document.getElementById("serviceCategory").value;
+      if (!country || !service || service === "Not sure yet" || !category) { paymentPanel.hidden = true; return; }
+      paymentPanel.hidden = false;
+      paymentHeading.textContent = category + " — Pricing & Payment";
+      paymentSummary.textContent = service + " · " + (country === "Pakistan" ? "Pakistan pricing" : "International pricing") + ". This is a starting estimate; confirm final scope before payment.";
+      const amounts = pricingAmounts[category];
+      selectedPrice.textContent = amounts ? (country === "Pakistan" ? "Starting from " + amounts[0] : "Starting from " + amounts[1]) : "Custom quote — confirm after reviewing your requirements";
+      paymentMethods.replaceChildren();
+      if (country === "Pakistan") {
+        paymentMethods.append(paymentCard("Easypaisa", "Available for Pakistan-based clients. Payment number/details will be shared securely after the quote is accepted."));
+        paymentMethods.append(paymentCard("Pakistani bank transfer", "Bank account title and transfer details will be provided on the approved invoice."));
+      } else {
+        paymentMethods.append(paymentCard("International bank transfer", "Bank transfer / SWIFT details will be provided on the approved invoice, if supported by your bank."));
+        paymentMethods.append(paymentCard("Other agreed method", "Any alternative payment method must be confirmed in writing before payment."));
+      }
+      const note = document.getElementById("advanceNote");
+      note.textContent = "Advance payment required: work starts only after the agreed advance is received. The advance percentage, milestones, delivery scope and refund/cancellation terms will be written on the quote or invoice. Never pay until you have verified the official invoice and payment recipient.";
+    }
+
     const projectService = document.getElementById("projectService");
 
     const serviceCategoryField = document.getElementById("serviceCategoryField");
@@ -907,6 +1140,9 @@ ${details}`;
     const serviceCategory = document.getElementById("serviceCategory");
 
     const serviceCategoryPreview = document.getElementById("serviceCategoryPreview");
+    clientCountry.addEventListener("change", updatePaymentPanel);
+    projectService.addEventListener("change", () => { updatePaymentPanel(); });
+    serviceCategory.addEventListener("change", updatePaymentPanel);
 
     // If a remote image URL is unavailable, show a locally embedded illustration instead of a broken image.
 
