@@ -12,8 +12,10 @@
 
   <meta name="description" content="NexOrbit creates responsive business websites, landing pages and modern graphic designs for businesses in Pakistan and worldwide. Explore our services and projects.">
 
-  <title>Web Development & Graphic Design Services | NexOrbit</title>
+  <title>NexOrbit | Web Development & Graphic Design Services</title>
 
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
 
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -93,6 +95,10 @@
     .logo { font-size: 1.65rem; font-weight: 850; letter-spacing: -1.4px; }
 
     .logo span { color: var(--cyan); }
+
+    .brand-logo { display: inline-flex; align-items: center; }
+    .brand-logo img { display: block; height: 52px; width: auto; max-width: 260px; object-fit: contain; }
+    .footer-logo img { height: 46px; }
 
     .nav-links { display: flex; align-items: center; gap: 30px; color: #d2e2f4; font-size: .92rem; }
 
@@ -395,6 +401,7 @@
       .nav-wrap { min-height: 68px; flex-wrap: wrap; padding-block: 12px; }
 
       .menu-toggle { display: inline-block; }
+      .brand-logo img { height: 42px; }
 
       .nav-links { display: none; width: 100%; padding: 12px 0 4px; flex-direction: column; align-items: stretch; gap: 14px; }
 
@@ -477,17 +484,8 @@
     .price-card h4 { margin:0 0 8px; font-size:1rem; }
     .price-card p { color:var(--muted); font-size:.9rem; margin:0 0 12px; }
     .price-local { color:var(--text); font-weight:750; font-size:1.08rem; }
-    .price-international { color:var(--accent); font-size:.9rem; margin-top:4px; }
+    .price-international { color:var(--cyan); font-size:.9rem; margin-top:4px; }
     .price-unit { color:var(--muted); font-size:.78rem; font-weight:400; }
-    .payment-panel { margin-top:22px; padding:22px; border:1px solid var(--line); border-radius:16px; background:linear-gradient(135deg,rgba(10,27,47,.96),rgba(7,18,34,.92)); text-align:left; }
-    .payment-panel h3 { margin:0 0 8px; }
-    .payment-panel p, .payment-panel li { color:var(--muted); }
-    .payment-methods { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; margin-top:14px; }
-    .payment-method { border:1px solid var(--line); border-radius:12px; padding:14px; background:rgba(255,255,255,.025); }
-    .payment-method strong { display:block; margin-bottom:5px; color:var(--text); }
-    .payment-price { color:var(--cyan); font-size:1.2rem; font-weight:750; margin:8px 0; }
-    .payment-note { font-size:.88rem; margin-top:14px; }
-    @media(max-width:560px){.payment-methods{grid-template-columns:1fr;}}
     .pricing-cta { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-top:26px; }
     @media (max-width:850px) { .pricing-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
     @media (max-width:560px) { .pricing-grid { grid-template-columns:1fr; } .pricing-section { padding:60px 0; } }
@@ -502,7 +500,7 @@
 
     <div class="container nav-wrap">
 
-      <a class="logo" href="#home" aria-label="NexOrbit home">Nex<span>Orbit</span></a>
+      <a class="logo brand-logo" href="#home" aria-label="NexOrbit home"><img src="nexorbit-logo.jpg" alt="NexOrbit logo"></a>
 
       <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks">Menu ☰</button>
 
@@ -853,7 +851,7 @@
                 <option value="Pakistan">Pakistan</option>
                 <option value="International">Outside Pakistan</option>
               </select>
-              <p class="form-note" style="margin-top:8px">Pricing and available payment methods will update based on your selection.</p>
+              <p class="form-note" style="margin-top:8px">Your country helps us prepare the right quotation.</p>
             </div>
 
             <div class="field full">
@@ -903,17 +901,6 @@
             </div>
 
             <div class="field full">
-              <div class="payment-panel" id="paymentPanel" hidden aria-live="polite">
-                <div class="eyebrow">Your Selected Service</div>
-                <h3 id="paymentHeading">Pricing &amp; Payment</h3>
-                <p id="paymentSummary">Select your country, service and category to see the relevant starting price and payment options.</p>
-                <div class="payment-price" id="selectedPrice"></div>
-                <div class="payment-methods" id="paymentMethods"></div>
-                <p class="payment-note" id="advanceNote">Advance payment is required before work begins. Final scope and payment instructions are confirmed in writing.</p>
-              </div>
-            </div>
-
-            <div class="field full">
 
               <label for="projectDetails">Tell us about your project *</label>
 
@@ -949,7 +936,7 @@
 
     <div class="container footer-inner">
 
-      <div class="footer-brand"><a class="logo" href="#home">Nex<span>Orbit</span></a><div class="footer-tagline">Design. Develop. Automate. Secure.</div></div>
+      <div class="footer-brand"><a class="logo brand-logo footer-logo" href="#home" aria-label="NexOrbit home"><img src="nexorbit-logo.jpg" alt="NexOrbit logo"></a><div class="footer-tagline">Ideas • Code • Reality</div></div>
 
       <nav class="footer-links" aria-label="Footer navigation"><a href="#services">Services</a><a href="#work">Work</a><a href="#pricing">Pricing</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
 
@@ -1003,6 +990,7 @@ I'd like to discuss a project.
 Name: ${name}
 
 Email: ${email}
+Country: ${country}
 
 Service: ${service}
 
@@ -1081,58 +1069,6 @@ ${details}`;
       });
       card.setAttribute("title", "Click to view " + category + " pricing");
     });
-
-    const clientCountry = document.getElementById("clientCountry");
-    const paymentPanel = document.getElementById("paymentPanel");
-    const paymentHeading = document.getElementById("paymentHeading");
-    const paymentSummary = document.getElementById("paymentSummary");
-    const selectedPrice = document.getElementById("selectedPrice");
-    const paymentMethods = document.getElementById("paymentMethods");
-    const pricingAmounts = {
-      "Logo Design & Brand Identity":["Rs. 5,000","$40"], "Social Media Design":["Rs. 1,000 / post","$10 / post"],
-      "Advertising & Ad Creatives":["Rs. 1,500 / ad","$15 / ad"], "Business Stationery":["Rs. 3,000 / set","$30 / set"],
-      "Print Design":["Rs. 2,500 / design","$25 / design"], "YouTube & Content Graphics":["Rs. 1,500 / thumbnail","$15 / thumbnail"],
-      "Packaging & Label Design":["Rs. 6,000","$60"], "Photo Editing & Image Manipulation":["Rs. 800 / image","$8 / image"],
-      "Business Website":["Rs. 25,000","$250"], "Landing Page":["Rs. 10,000","$100"], "Portfolio Website":["Rs. 15,000","$150"],
-      "E-commerce Website":["Rs. 50,000","$500"], "WordPress Website":["Rs. 20,000","$200"], "Website Redesign":["Rs. 15,000","$150"],
-      "Website Maintenance":["Rs. 5,000 / month","$50 / month"], "Mobile Optimization":["Rs. 5,000","$50"],
-      "Custom Software":["Rs. 50,000","$500"], "Web Application":["Rs. 60,000","$600"], "Desktop Application":["Rs. 40,000","$400"],
-      "API Integration":["Rs. 10,000","$100"], "Database Design & Setup":["Rs. 10,000","$100"], "Bug Fixes":["Rs. 3,000","$30"], "Python Automation Script":["Rs. 8,000","$80"],
-      "AI Chatbot":["Rs. 20,000","$200"], "Business Workflow Automation":["Rs. 15,000","$150"], "AI Assistant Integration":["Rs. 25,000","$250"],
-      "Automated Email Systems":["Rs. 10,000","$100"], "AI Document Processing":["Rs. 20,000","$200"], "CRM Automation":["Rs. 20,000","$200"], "Custom AI Integration":["Rs. 30,000","$300"],
-      "Security Consultation":["Rs. 5,000 / session","$50 / session"], "Website Security Review":["Rs. 15,000","$150"], "Authorized Vulnerability Assessment":["Rs. 25,000","$250"],
-      "Security Hardening":["Rs. 15,000","$150"], "Basic Security Audit":["Rs. 20,000","$200"], "Security Awareness Training":["Rs. 10,000 / session","$100 / session"], "Security Monitoring Setup":["Rs. 25,000","$250"],
-      "PC Troubleshooting":["Rs. 2,000 / session","$20 / session"], "Software Installation & Setup":["Rs. 1,500","$15"], "System Optimization":["Rs. 3,000","$30"],
-      "Wi-Fi & Network Troubleshooting":["Rs. 3,000","$30"], "Backup & Data Transfer":["Rs. 3,000","$30"], "Remote IT Support":["Rs. 2,000 / hour","$20 / hour"], "Small Business IT Setup":["Rs. 15,000","$150"]
-    };
-    function paymentCard(title, body) {
-      const el = document.createElement("div"); el.className = "payment-method";
-      const strong = document.createElement("strong"); strong.textContent = title;
-      const p = document.createElement("p"); p.textContent = body;
-      el.append(strong,p); return el;
-    }
-    function updatePaymentPanel() {
-      const country = clientCountry.value;
-      const service = document.getElementById("projectService").value;
-      const category = document.getElementById("serviceCategory").value;
-      if (!country || !service || service === "Not sure yet" || !category) { paymentPanel.hidden = true; return; }
-      paymentPanel.hidden = false;
-      paymentHeading.textContent = category + " — Pricing & Payment";
-      paymentSummary.textContent = service + " · " + (country === "Pakistan" ? "Pakistan pricing" : "International pricing") + ". This is a starting estimate; confirm final scope before payment.";
-      const amounts = pricingAmounts[category];
-      selectedPrice.textContent = amounts ? (country === "Pakistan" ? "Starting from " + amounts[0] : "Starting from " + amounts[1]) : "Custom quote — confirm after reviewing your requirements";
-      paymentMethods.replaceChildren();
-      if (country === "Pakistan") {
-        paymentMethods.append(paymentCard("Easypaisa", "Available for Pakistan-based clients. Payment number/details will be shared securely after the quote is accepted."));
-        paymentMethods.append(paymentCard("Pakistani bank transfer", "Bank account title and transfer details will be provided on the approved invoice."));
-      } else {
-        paymentMethods.append(paymentCard("International bank transfer", "Bank transfer / SWIFT details will be provided on the approved invoice, if supported by your bank."));
-        paymentMethods.append(paymentCard("Other agreed method", "Any alternative payment method must be confirmed in writing before payment."));
-      }
-      const note = document.getElementById("advanceNote");
-      note.textContent = "Advance payment required: work starts only after the agreed advance is received. The advance percentage, milestones, delivery scope and refund/cancellation terms will be written on the quote or invoice. Never pay until you have verified the official invoice and payment recipient.";
-    }
-
     const projectService = document.getElementById("projectService");
 
     const serviceCategoryField = document.getElementById("serviceCategoryField");
@@ -1140,9 +1076,6 @@ ${details}`;
     const serviceCategory = document.getElementById("serviceCategory");
 
     const serviceCategoryPreview = document.getElementById("serviceCategoryPreview");
-    clientCountry.addEventListener("change", updatePaymentPanel);
-    projectService.addEventListener("change", () => { updatePaymentPanel(); });
-    serviceCategory.addEventListener("change", updatePaymentPanel);
 
     // If a remote image URL is unavailable, show a locally embedded illustration instead of a broken image.
 
