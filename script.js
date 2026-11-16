@@ -279,7 +279,7 @@ ${details}`;
 
         choose.textContent = "Choose this category";
 
-        choose.style.marginTop = "12px";
+        choose.classList.add("category-choose");
 
         choose.addEventListener("click", () => {
 
