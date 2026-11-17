@@ -231,9 +231,15 @@ ${details}`;
 
       const options = serviceCategories[service] || [];
 
-      serviceCategory.innerHTML = '<option value="">Select a category</option>';
+      const placeholderOption = document.createElement("option");
 
-      serviceCategoryPreview.innerHTML = "";
+      placeholderOption.value = "";
+
+      placeholderOption.textContent = "Select a category";
+
+      serviceCategory.replaceChildren(placeholderOption);
+
+      serviceCategoryPreview.replaceChildren();
 
       options.forEach(([category, image, description]) => {
 
@@ -371,7 +377,7 @@ ${details}`;
 
       const items = serviceCategories[serviceName] || [];
 
-      designCategoryGrid.innerHTML = "";
+      designCategoryGrid.replaceChildren();
 
       items.forEach(([name, image, description]) => {
 
