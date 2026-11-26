@@ -431,7 +431,7 @@ ${details}`;
 
         designCategoryGrid.hidden = !isServiceCategory;
 
-        workProjectGrid.hidden = isServiceCategory;
+        workProjectGrid.hidden = isServiceCategory && filter !== "web";
 
         categoryDetails.hidden = true;
 
@@ -441,17 +441,15 @@ ${details}`;
 
           renderSelectedWorkCategories(workCategoryServices[filter]);
 
-        } else {
-
-          workCards.forEach(card => {
-
-            const categories = (card.dataset.category || "").split(/\s+/);
-
-            card.hidden = filter !== "all" && !categories.includes(filter);
-
-          });
-
         }
+
+        workCards.forEach(card => {
+
+          const categories = (card.dataset.category || "").split(/\s+/);
+
+          card.hidden = filter !== "all" && !categories.includes(filter);
+
+        });
 
       });
 
