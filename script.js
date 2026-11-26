@@ -72,7 +72,7 @@ ${details}`;
 
       const message = encodeURIComponent(getInquiryMessage());
 
-      window.open(`https://wa.me/923287894595?text=${message}`, "_blank", "noopener,noreferrer");
+      window.open(`https://wa.me/923390102726?text=${message}`, "_blank", "noopener,noreferrer");
 
     });
 
