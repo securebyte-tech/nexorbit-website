@@ -51,7 +51,7 @@ jobs:
           def download(tup):
               name, url = tup
               last_error = "unknown error"
-          for attempt in range(3):
+              for attempt in range(3):
                   try:
                       req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 NexOrbit-Original-Assets'})
                       with urllib.request.urlopen(req,timeout=35) as response:
