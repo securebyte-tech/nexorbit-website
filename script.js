@@ -139,7 +139,7 @@ ${details}`;
 
         ["E-commerce Website", "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=80", "An online store with product listings, shopping features and clear paths to purchase."],
 
-        ["Website Redesign", "https://images.unsplash.com/photo-1547657278-fd2f1b6f8f4f?auto=format&fit=crop&w=900&q=80", "Improving an existing website's layout, usability, mobile experience and visual style."],
+        ["Website Redesign", "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=900&q=80", "Improving an existing website's layout, usability, mobile experience and visual style."],
 
         ["Website Maintenance", "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=900&q=80", "Updates, content changes, routine checks and small fixes to keep a website working well."]
 
@@ -147,7 +147,7 @@ ${details}`;
 
       "Graphic Design": [
 
-        ["Logo Design & Brand Identity", "https://images.unsplash.com/photo-1634942536790-2534db7a7c3e?auto=format&fit=crop&w=900&q=80", "Logos, brand marks, color palettes and typography that give a business a consistent visual identity."],
+        ["Logo Design & Brand Identity", "https://images.unsplash.com/photo-1626785774573-4b799315345d?auto=format&fit=crop&w=900&q=80", "Logos, brand marks, color palettes and typography that give a business a consistent visual identity."],
 
         ["Social Media Design", "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=900&q=80", "Posts, stories, carousel graphics and cover designs for platforms such as Instagram and Facebook."],
 
@@ -159,7 +159,7 @@ ${details}`;
 
         ["YouTube & Content Graphics", "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?auto=format&fit=crop&w=900&q=80", "Video thumbnails, channel banners, podcast covers and other graphics for creators."],
 
-        ["Packaging & Label Design", "https://images.unsplash.com/photo-1602148797690-5f9e7c5c7a4d?auto=format&fit=crop&w=900&q=80", "Product boxes, packaging artwork and labels that help products look polished."],
+        ["Packaging & Label Design", "https://images.unsplash.com/photo-1669292618143-8e0337388811?auto=format&fit=crop&w=900&q=80", "Product boxes, packaging artwork and labels that help products look polished."],
 
         ["Photo Editing & Image Manipulation", "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&w=900&q=80", "Image cleanup, retouching, background removal and creative edits for professional visuals."]
 
