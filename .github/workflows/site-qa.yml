@@ -1,0 +1,89 @@
+name: NexOrbit Website QA
+on:
+  push:
+    branches: [main]
+    paths:
+      - index.html
+      - style.css
+      - script.js
+      - .github/workflows/site-qa.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - name: Checkout website
+        uses: actions/checkout@v4
+      - name: Check JavaScript syntax
+        run: node --check script.js
+      - name: Validate website structure and business links
+        run: |
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          import re
+          html = Path('index.html').read_text(encoding='utf-8')
+          css = Path('style.css').read_text(encoding='utf-8')
+          script = Path('script.js').read_text(encoding='utf-8')
+          class Reader(HTMLParser):
+              def __init__(self):
+                  super().__init__(convert_charrefs=True)
+                  self.ids=set()
+                  self.duplicate=[]
+                  self.links=[]
+              def handle_starttag(self,tag,attrs):
+                  data=dict(attrs)
+                  if data.get('id'):
+                      value=data['id']
+                      if value in self.ids:self.duplicate.append(value)
+                      self.ids.add(value)
+                  if data.get('href') and data['href'].startswith('#'):
+                      self.links.append(data['href'][1:])
+          reader=Reader()
+          reader.feed(html)
+          required=['main','home','services','work','process','about','contact','workProjectGrid','inquiryForm','clientName','clientEmail','projectService','projectDetails']
+          missing=set(required)-reader.ids
+          assert not missing,'Missing required section IDs: '+str(missing)
+          assert not reader.duplicate,'Duplicated section IDs: '+str(reader.duplicate)
+          broken=[frag for frag in reader.links if frag and frag not in reader.ids]
+          assert not broken,'Broken anchor links: '+str(broken)
+          assert 'class="work-card work-featured"' in html,'Featured demo card absent'
+          assert 'EduBridge Academy' in html,'Portfolio demo label absent'
+          assert html.count('class="process-card"') == 4,'Four process steps needed'
+          assert 'rel="canonical"' in html,'Canonical metadata missing'
+          assert 'https://wa.me/923390102726' in script,'Expected business WhatsApp link missing'
+          assert 'document.querySelectorAll(".work-filter")' in script,'Category filters missing'
+          assert 'font' in css and 'featured-showcase-art' in css,'Visual styling not available'
+          assert '\\* {' not in css,'Escaped CSS wildcard selector'
+          assert css.count('{') == css.count('}'),'CSS braces mismatch'
+          print('PASS: NexOrbit page structure, anchors, CSS, portfolio, filters and WhatsApp')
+          PY
+      - name: Capture desktop and mobile screenshots
+        shell: bash
+        run: |
+          set -e
+          BROWSER="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          if [ -z "$BROWSER" ]; then echo "Chrome not available"; exit 0; fi
+          mkdir -p screenshots
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/nexorbit-qa-server.log 2>&1 &
+          sleep 2
+          for item in desktop mobile portfolio; do
+            case "$item" in
+              desktop) W=1440; H=1024; ROUTE=/ ;;
+              mobile) W=390; H=880; ROUTE=/ ;;
+              portfolio) W=1440; H=1100; ROUTE=/#work ;;
+            esac
+            timeout 35s "$BROWSER" --headless --no-sandbox --disable-dev-shm-usage --disable-gpu --disable-extensions --hide-scrollbars --window-size="$W,$H" --virtual-time-budget=6000 --screenshot="screenshots/$item.png" "http://127.0.0.1:8765$ROUTE" || true
+          done
+          ls -lh screenshots || true
+      - name: Upload QA screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: NexOrbit-Site-Screenshots
+          path: screenshots/*.png
+          if-no-files-found: ignore
+          retention-days: 7
