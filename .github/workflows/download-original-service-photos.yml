@@ -1,0 +1,84 @@
+name: Package NexOrbit Original Service Photos
+on:
+  push:
+    branches:
+      - catalog/original-service-photos
+permissions:
+  contents: read
+jobs:
+  package-images:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Download exact original website photo IDs as JPG
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import urllib.request, time, pathlib, zipfile
+          from concurrent.futures import ThreadPoolExecutor, as_completed
+          links = [
+          ("photo-1451187580459-43490279c0fa.jpg", "https://images.unsplash.com/photo-1451187580459-43490279c0fa?fm=jpg&fit=crop&w=900&q=80"),
+          ("photo-1454165804606-c3d57bc86b40.jpg", "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?fm=jpg&fit=crop&w=900&q=80"),
+          ("photo-1460925895917-afdab827c52f.jpg", "https://images.unsplash.com/photo-1460925895917-afdab827c52f?fm=jpg&fit=crop&w=900&q=80"),
+          ("photo-1467232004584-a241de8bcf5d.jpg", "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?fm=jpg&fit=crop&w=900&q=80"),
+          ("photo-1498050108023-c5249f4df085.jpg", "https://images.unsplash.com/photo-1498050108023-c5249f4df085?fm=jpg&fit=crop&w=900&q=80"),
+          ("photo-1507238691740-187a5b1d37b8.jpg", "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?fm=jpg&fit=crop&w=900&q=80"),
+          ("photo-1510511459019-5dda7724fd87.jpg", "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?fm=jpg&fit=crop&w=900&q=80"),
+          ("photo-1516321318423-f06f85e504b3.jpg", "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?fm=jpg&fit=crop&w=900&q=80"),
+          ("photo-1518770660439-4636190af475.jpg", "https://images.unsplash.com/photo-1518770660439-4636190af475?fm=jpg&fit=crop&w=900&q=80"),
+          ("photo-1519389950473-47ba0277781c.jpg", "https://images.unsplash.com/photo-1519389950473-47ba0277781c?fm=jpg&fit=crop&w=900&q=80"),
+          ("photo-1542038784456-1ea8e935640e.jpg", "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?fm=jpg&fit=crop&w=900&q=80"),
+          ("photo-1542291026-7eec264c27ff.jpg", "https://images.unsplash.com/photo-1542291026-7eec264c27ff?fm=jpg&fit=crop&w=900&q=80"),
+          ("photo-1547657278-fd2f1b6f8f4f.jpg", "https://images.unsplash.com/photo-1547657278-fd2f1b6f8f4f?fm=jpg&fit=crop&w=900&q=80"),
+          ("photo-1550751827-4bd374c3f58b.jpg", "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?fm=jpg&fit=crop&w=900&q=80"),
+          ("photo-1551288049-bebda4e38f71.jpg", "https://images.unsplash.com/photo-1551288049-bebda4e38f71?fm=jpg&fit=crop&w=900&q=80"),
+          ("photo-1556742049-0cfed4f6a45d.jpg", "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?fm=jpg&fit=crop&w=900&q=80"),
+          ("photo-1558494949-ef010cbdcc31.jpg", "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?fm=jpg&fit=crop&w=900&q=80"),
+          ("photo-1558655146-d09347e92766.jpg", "https://images.unsplash.com/photo-1558655146-d09347e92766?fm=jpg&fit=crop&w=900&q=80"),
+          ("photo-1563013544-824ae1b704d3.jpg", "https://images.unsplash.com/photo-1563013544-824ae1b704d3?fm=jpg&fit=crop&w=900&q=80"),
+          ("photo-1587202372775-e229f172b9d7.jpg", "https://images.unsplash.com/photo-1587202372775-e229f172b9d7?fm=jpg&fit=crop&w=900&q=80"),
+          ("photo-1589330694653-ded6df03f754.jpg", "https://images.unsplash.com/photo-1589330694653-ded6df03f754?fm=jpg&fit=crop&w=900&q=80"),
+          ("photo-1602148797690-5f9e7c5c7a4d.jpg", "https://images.unsplash.com/photo-1602148797690-5f9e7c5c7a4d?fm=jpg&fit=crop&w=900&q=80"),
+          ("photo-1611162617474-5b21e879e113.jpg", "https://images.unsplash.com/photo-1611162617474-5b21e879e113?fm=jpg&fit=crop&w=900&q=80"),
+          ("photo-1611532736597-de2d4265fba3.jpg", "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?fm=jpg&fit=crop&w=900&q=80"),
+          ("photo-1626785774573-4b799315345d.jpg", "https://images.unsplash.com/photo-1626785774573-4b799315345d?fm=jpg&fit=crop&w=900&q=80"),
+          ("photo-1634942536790-2534db7a7c3e.jpg", "https://images.unsplash.com/photo-1634942536790-2534db7a7c3e?fm=jpg&fit=crop&w=900&q=80"),
+          ("photo-1676299081847-824916de030a.jpg", "https://images.unsplash.com/photo-1676299081847-824916de030a?fm=jpg&fit=crop&w=900&q=80"),
+          ("photo-1677442136019-21780ecad995.jpg", "https://images.unsplash.com/photo-1677442136019-21780ecad995?fm=jpg&fit=crop&w=900&q=80"),
+          ]
+          out = pathlib.Path("Original_Website_Service_Photos")
+          out.mkdir(exist_ok=True)
+          def download(tup):
+              name, url = tup
+              for attempt in range(3):
+                  try:
+                      req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 NexOrbit-Original-Assets'})
+                      with urllib.request.urlopen(req,timeout=35) as response:
+                          data=response.read()
+                      if len(data)<4000 or not data.startswith(b'\xff\xd8\xff'):
+                          raise ValueError('Not a valid JPEG')
+                      (out / name).write_bytes(data)
+                      return (name, len(data), None)
+                  except Exception as exc:
+                      if attempt < 2: time.sleep(1.5 * (attempt+1))
+              return (name, 0, str(exc))
+          with ThreadPoolExecutor(max_workers=6) as ex:
+              results=list(ex.map(download,links))
+          success=[r for r in results if r[1] > 0]
+          print('SUCCESS:',len(success),'/',len(links))
+          for name, size, err in results:
+              print(('OK' if size else 'FAIL'),name,size,err or '')
+          with zipfile.ZipFile("NexOrbit_Service_Photos_Original.zip","w",zipfile.ZIP_DEFLATED,compresslevel=6) as z:
+              for name, _, _ in success:
+                  z.write(out/name,arcname="Original_Website_Service_Photos/"+name)
+          if len(success)!=len(links):
+              raise RuntimeError("Not all original photos could be downloaded")
+          PY
+      - name: Upload real JPG ZIP
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: NexOrbit_Original_Service_Photos_JPG
+          path: NexOrbit_Service_Photos_Original.zip
+          if-no-files-found: warn
+          retention-days: 14
