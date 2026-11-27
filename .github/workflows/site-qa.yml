@@ -87,3 +87,15 @@ jobs:
           path: screenshots/*.png
           if-no-files-found: ignore
           retention-days: 7
+
+      - name: Upload source for visual tests
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: NexOrbit-Preview-Source
+          path: |
+            index.html
+            style.css
+            script.js
+          if-no-files-found: error
+          retention-days: 7
